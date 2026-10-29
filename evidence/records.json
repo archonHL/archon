@@ -1,0 +1,1079 @@
+{
+ "records": [
+  {
+   "sha256": "2d016676b36cee0a1ee571b0ae38dc48ee97b77003e2303f85d12e17967e8613",
+   "seq": 1,
+   "kind": "proposal",
+   "subject": "C001-funding_exit",
+   "prev_sha256": null,
+   "written_utc": "2026-10-28T10:59:30+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "bars closing from 2025-12-01T00:00:00+00:00"
+   },
+   "trials": {
+    "global_after": 1023,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.47952047952047955,
+    "deflated_sharpe": {
+     "probability": 0.5421210621086513,
+     "trials": 1023,
+     "sharpe_daily": 0.00923236003142548,
+     "skew": 0.19208179323936883,
+     "kurtosis": 5.945492548017736,
+     "expected_max_sharpe_daily": 0.004684164144740773
+    }
+   }
+  },
+  {
+   "sha256": "ea9a9ce8c58d3379725855041fc45b6ce51308051d27ab53e76d6621cad866b7",
+   "seq": 2,
+   "kind": "oos",
+   "subject": "C001-funding_exit",
+   "prev_sha256": "2d016676b36cee0a1ee571b0ae38dc48ee97b77003e2303f85d12e17967e8613",
+   "written_utc": "2026-10-28T10:59:30+00:00",
+   "passes": true,
+   "result": {
+    "first_close_utc": "2026-01-20T08:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 32,
+    "port_return_pct": 22.59718560221595,
+    "port_drawdown_pct": -9.477299753969948,
+    "hold_return_pct": 31.182815720555524,
+    "hold_drawdown_pct": -33.08545021616046,
+    "cash_return_pct": 3.0633755232282844,
+    "median_pct": 7.201188453491825,
+    "mean_ex_top2_pct": 11.825054237655536,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": true,
+     "not_carried": true
+    }
+   }
+  },
+  {
+   "sha256": "75edea9be92761a423ffc4c2d6a752a41ddf81db77f4644100addfea5c2b5aa7",
+   "seq": 4,
+   "kind": "oos-correction",
+   "subject": "C001-funding_exit",
+   "prev_sha256": "3e33d79c45198c4797bb94ae3d0f6ca68a65f3ac41bcc131aedfe8a79522702f",
+   "written_utc": "2026-10-28T11:10:30+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": true,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 20.517187900252164,
+    "port_drawdown_pct": -10.097347293403558,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": 8.432793124250004,
+    "mean_ex_top2_pct": 13.162556780797232,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": true,
+     "not_carried": true
+    }
+   },
+   "corrects": {
+    "file": "0002-oos-C001-funding_exit.json",
+    "sha256": "ea9a9ce8c58d3379725855041fc45b6ce51308051d27ab53e76d6621cad866b7",
+    "in_sample_overlap_days": 39.7,
+    "passes": true
+   }
+  },
+  {
+   "sha256": "c079993592c438a3420a70997cafce4389099dfb7c012152224b1bbd480d159b",
+   "seq": 5,
+   "kind": "proposal",
+   "subject": "C002-breakout_levered",
+   "prev_sha256": "75edea9be92761a423ffc4c2d6a752a41ddf81db77f4644100addfea5c2b5aa7",
+   "written_utc": "2026-10-28T12:22:14+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1038,
+    "this_proposal": 15
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.1918081918081918,
+    "deflated_sharpe": {
+     "probability": 0.29543490646896764,
+     "trials": 1038,
+     "sharpe_daily": 0.012602015900085686,
+     "skew": 0.12699020415231715,
+     "kurtosis": 7.596591514679675,
+     "expected_max_sharpe_daily": 0.03572011647990327
+    }
+   }
+  },
+  {
+   "sha256": "4c13c7a33a003dce78493c7550f2e526f9371e6d1e6f5a4ca3b48384a8f411aa",
+   "seq": 6,
+   "kind": "oos",
+   "subject": "C002-breakout_levered",
+   "prev_sha256": "c079993592c438a3420a70997cafce4389099dfb7c012152224b1bbd480d159b",
+   "written_utc": "2026-10-28T12:22:14+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 36.28695331459997,
+    "port_drawdown_pct": -14.166721650350212,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": 10.535936509025735,
+    "mean_ex_top2_pct": 18.057201995771834,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "410cc8ebf187c7029e9207da26912df9efe074add78d07cfb0ba14fb2b1a4b92",
+   "seq": 7,
+   "kind": "proposal",
+   "subject": "C003-fast_breakout_levered",
+   "prev_sha256": "4c13c7a33a003dce78493c7550f2e526f9371e6d1e6f5a4ca3b48384a8f411aa",
+   "written_utc": "2026-10-28T12:22:21+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1048,
+    "this_proposal": 10
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.15184815184815184,
+    "deflated_sharpe": {
+     "probability": 0.22171670940392424,
+     "trials": 1048,
+     "sharpe_daily": 0.012223757738532291,
+     "skew": 0.22844673251534628,
+     "kurtosis": 7.552797917360711,
+     "expected_max_sharpe_daily": 0.04516267854842418
+    }
+   }
+  },
+  {
+   "sha256": "54e799b19ac93671aa9ca7edd3344f156ac6015e4414253f05f619ebdc1b4eb8",
+   "seq": 8,
+   "kind": "oos",
+   "subject": "C003-fast_breakout_levered",
+   "prev_sha256": "410cc8ebf187c7029e9207da26912df9efe074add78d07cfb0ba14fb2b1a4b92",
+   "written_utc": "2026-10-28T12:22:21+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 27.29379221871686,
+    "port_drawdown_pct": -12.671660030453713,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": 7.180326450559549,
+    "mean_ex_top2_pct": 14.325424657879527,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "8d4502e25b8be7b9e0fcf404eeb6cd5276b320eedfba7675257353efff34ca87",
+   "seq": 9,
+   "kind": "proposal",
+   "subject": "C004-breadth_levered",
+   "prev_sha256": "54e799b19ac93671aa9ca7edd3344f156ac6015e4414253f05f619ebdc1b4eb8",
+   "written_utc": "2026-10-28T12:22:25+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1058,
+    "this_proposal": 10
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.22477522477522477,
+    "deflated_sharpe": {
+     "probability": 0.38098569734817034,
+     "trials": 1058,
+     "sharpe_daily": 0.016104786943789574,
+     "skew": 0.20901226271648476,
+     "kurtosis": 7.383806301234507,
+     "expected_max_sharpe_daily": 0.02911997284262244
+    }
+   }
+  },
+  {
+   "sha256": "d066b85340a6e7781b77719251eabfd3a12d036d78a09745712220fc396e6093",
+   "seq": 10,
+   "kind": "oos",
+   "subject": "C004-breadth_levered",
+   "prev_sha256": "8d4502e25b8be7b9e0fcf404eeb6cd5276b320eedfba7675257353efff34ca87",
+   "written_utc": "2026-10-28T12:22:25+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 5.843771807803622,
+    "port_drawdown_pct": -20.194882625010134,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": -7.6349055506569785,
+    "mean_ex_top2_pct": -1.2105640560688986,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": false,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "8a9c8558b8f05a61ff5d08e3afe2f60aaab235d035d8159db889017147bc1999",
+   "seq": 20,
+   "kind": "proposal",
+   "subject": "C005-breakout_levered",
+   "prev_sha256": "515aa376f9ebc9b70bccc1b6540682682fc8bbf0fba14bdae43cb695845a0fbe",
+   "written_utc": "2026-10-28T12:31:42+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1073,
+    "this_proposal": 15
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.24075924075924077,
+    "deflated_sharpe": {
+     "probability": 0.5903867806747495,
+     "trials": 1073,
+     "sharpe_daily": 0.03541529626961594,
+     "skew": 0.036228981908619506,
+     "kurtosis": 7.719419310041469,
+     "expected_max_sharpe_daily": 0.025576448651705136
+    }
+   }
+  },
+  {
+   "sha256": "5fd15c635b348ab207a49aef6a04efa94bbfdee856baa33d9472a4cbb86a06d6",
+   "seq": 21,
+   "kind": "oos",
+   "subject": "C005-breakout_levered",
+   "prev_sha256": "8a9c8558b8f05a61ff5d08e3afe2f60aaab235d035d8159db889017147bc1999",
+   "written_utc": "2026-10-28T12:31:42+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 28.741734534557327,
+    "port_drawdown_pct": -15.338661087010275,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": 5.696202494174818,
+    "mean_ex_top2_pct": 11.130245376705693,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "05451759b19f0a78c64e60e64d1032f91228ae6f0eaf22783ed8a09e9320c28c",
+   "seq": 22,
+   "kind": "proposal",
+   "subject": "C006-fast_breakout_levered",
+   "prev_sha256": "5fd15c635b348ab207a49aef6a04efa94bbfdee856baa33d9472a4cbb86a06d6",
+   "written_utc": "2026-10-28T12:31:53+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1083,
+    "this_proposal": 10
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.17182817182817184,
+    "deflated_sharpe": {
+     "probability": 0.3875765525004623,
+     "trials": 1083,
+     "sharpe_daily": 0.02504531540573391,
+     "skew": 0.15675601986331175,
+     "kurtosis": 7.897243253799902,
+     "expected_max_sharpe_daily": 0.0373198523355315
+    }
+   }
+  },
+  {
+   "sha256": "753c5503979b7a172b126e12a1fa5d73e7477fecd03714c8e7de126b373f2bf0",
+   "seq": 23,
+   "kind": "oos",
+   "subject": "C006-fast_breakout_levered",
+   "prev_sha256": "05451759b19f0a78c64e60e64d1032f91228ae6f0eaf22783ed8a09e9320c28c",
+   "written_utc": "2026-10-28T12:31:53+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 30.08175903721746,
+    "port_drawdown_pct": -15.88606596987978,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": 5.875204289982627,
+    "mean_ex_top2_pct": 15.246410275896327,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "e811ed1d6791f487b7b04559e9a4b232853467a5817866226a950710e19e4ce0",
+   "seq": 24,
+   "kind": "proposal",
+   "subject": "C007-breadth_levered",
+   "prev_sha256": "753c5503979b7a172b126e12a1fa5d73e7477fecd03714c8e7de126b373f2bf0",
+   "written_utc": "2026-10-28T12:31:57+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1093,
+    "this_proposal": 10
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.2037962037962038,
+    "deflated_sharpe": {
+     "probability": 0.43243439759615515,
+     "trials": 1093,
+     "sharpe_daily": 0.023056035266440608,
+     "skew": 0.19759047395045007,
+     "kurtosis": 7.272270679701566,
+     "expected_max_sharpe_daily": 0.030365762809164993
+    }
+   }
+  },
+  {
+   "sha256": "dd60db27cca699e91b8b032e329101461329740038e047524ea4f508c977117c",
+   "seq": 25,
+   "kind": "oos",
+   "subject": "C007-breadth_levered",
+   "prev_sha256": "e811ed1d6791f487b7b04559e9a4b232853467a5817866226a950710e19e4ce0",
+   "written_utc": "2026-10-28T12:31:57+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T08:00Z",
+    "markets": 31,
+    "port_return_pct": 7.788985333467546,
+    "port_drawdown_pct": -23.4192667584758,
+    "hold_return_pct": 60.6562920487707,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.623481767758218,
+    "median_pct": -10.124169599719668,
+    "mean_ex_top2_pct": -3.5781903604748306,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": false,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "2a2e01d50e19d6d0491c7a466c2ffa59122ab162e4a0cad6ea13f82c89738f3f",
+   "seq": 29,
+   "kind": "family-proposal",
+   "subject": "F001-carry-1d",
+   "prev_sha256": "b679454e163be55962ca37a4afc941369f3ad7d7cca2833934da5e7024b90908",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1099,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 1023,
+    "reality_check_p": 0.4195804195804196,
+    "deflated_sharpe": {
+     "probability": 0.35019836390026604,
+     "trials": 1099,
+     "sharpe_daily": 0.0044649994540087385,
+     "skew": 0.03263191712529867,
+     "kurtosis": 8.304383475670699,
+     "expected_max_sharpe_daily": 0.016500632252269838
+    }
+   }
+  },
+  {
+   "sha256": "1221174bd610b1a79f685b2cb9a7c85228c9093c67ac29919677bef6b17d2e84",
+   "seq": 30,
+   "kind": "family-oos",
+   "subject": "F001-carry-1d",
+   "prev_sha256": "2a2e01d50e19d6d0491c7a466c2ffa59122ab162e4a0cad6ea13f82c89738f3f",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-02T00:00Z",
+    "last_close_utc": "2026-10-28T00:00Z",
+    "markets": 31,
+    "port_return_pct": 29.85020028114407,
+    "port_drawdown_pct": -11.879269975137285,
+    "hold_return_pct": 61.42856863968571,
+    "hold_drawdown_pct": -25.563235129948538,
+    "cash_return_pct": 2.6106261901929217,
+    "median_pct": 0.8862093173483743,
+    "mean_ex_top2_pct": 13.554019073151407,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "901a529069a4ccc2b98e6b051455a9205573b3ddc0b5f77bb14645a11c759bfb",
+   "seq": 31,
+   "kind": "family-proposal",
+   "subject": "F002-ensemble-4h",
+   "prev_sha256": "1221174bd610b1a79f685b2cb9a7c85228c9093c67ac29919677bef6b17d2e84",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1105,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.35364635364635366,
+    "deflated_sharpe": {
+     "probability": 0.5667873683589614,
+     "trials": 1105,
+     "sharpe_daily": 0.014801803631650476,
+     "skew": 0.30277251471620786,
+     "kurtosis": 10.501171980117798,
+     "expected_max_sharpe_daily": 0.007577941133391674
+    }
+   }
+  },
+  {
+   "sha256": "fd9f7f2d511be6234f719460739ae12761ed0b31ccdf801c87e7f8087d207e87",
+   "seq": 32,
+   "kind": "family-oos",
+   "subject": "F002-ensemble-4h",
+   "prev_sha256": "901a529069a4ccc2b98e6b051455a9205573b3ddc0b5f77bb14645a11c759bfb",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 35.37495246418179,
+    "port_drawdown_pct": -18.49355467571773,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": 15.91126997450305,
+    "mean_ex_top2_pct": 21.218424698876042,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "9ae5ddb72726db69d0810e631bf02b9f6bedb9acef657ad61f67d3b25b8e046a",
+   "seq": 33,
+   "kind": "family-proposal",
+   "subject": "F003-mtf-4h",
+   "prev_sha256": "fd9f7f2d511be6234f719460739ae12761ed0b31ccdf801c87e7f8087d207e87",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1111,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 490,
+    "reality_check_p": 0.2707292707292707,
+    "deflated_sharpe": {
+     "probability": 0.626907000390997,
+     "trials": 1111,
+     "sharpe_daily": 0.020678763111998212,
+     "skew": 0.04491734681302797,
+     "kurtosis": 7.500355724531173,
+     "expected_max_sharpe_daily": 0.00604349919671042
+    }
+   }
+  },
+  {
+   "sha256": "06996d6d623b9f29e3b0e581c1359b90bdc1ede6e43ab35e5d59a8cc8819c263",
+   "seq": 34,
+   "kind": "family-oos",
+   "subject": "F003-mtf-4h",
+   "prev_sha256": "9ae5ddb72726db69d0810e631bf02b9f6bedb9acef657ad61f67d3b25b8e046a",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 35.39578152534237,
+    "port_drawdown_pct": -14.066546724780181,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": 10.535936509025735,
+    "mean_ex_top2_pct": 17.10457008311715,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "ca4e2124c6dec4fe9266c3b9d3d6c367fa8e949b41fa87afc8222682db9e9a5e",
+   "seq": 35,
+   "kind": "family-proposal",
+   "subject": "F004-slots-breakout-4h",
+   "prev_sha256": "06996d6d623b9f29e3b0e581c1359b90bdc1ede6e43ab35e5d59a8cc8819c263",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1123,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.025974025974025976,
+    "deflated_sharpe": {
+     "probability": 0.556864964145542,
+     "trials": 1123,
+     "sharpe_daily": 0.05617697999987625,
+     "skew": -0.18763928243387307,
+     "kurtosis": 7.11442267766836,
+     "expected_max_sharpe_daily": 0.049975039589675335
+    }
+   }
+  },
+  {
+   "sha256": "f8772a215ca127de7f03299b433eaa85932c4d369b6c73cd618f14a4cde029a8",
+   "seq": 36,
+   "kind": "family-oos",
+   "subject": "F004-slots-breakout-4h",
+   "prev_sha256": "ca4e2124c6dec4fe9266c3b9d3d6c367fa8e949b41fa87afc8222682db9e9a5e",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": true,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 82.0867980493691,
+    "port_drawdown_pct": -25.738654256896176,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": 5.411692058118045,
+    "mean_ex_top2_pct": 11.037359034811233,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": true,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "ad4234674756e4dfcd4c45229d2f5596b29995ef7889f56226c5f72710b5fd76",
+   "seq": 38,
+   "kind": "family-proposal",
+   "subject": "F005-slots-momentum-4h",
+   "prev_sha256": "565dfb15618f752a37718b2cb3854c715c5e0b65f67bdc03b46b1c2bd1dbcb7a",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1135,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.013986013986013986,
+    "deflated_sharpe": {
+     "probability": 0.018554215781919903,
+     "trials": 1135,
+     "sharpe_daily": 0.030344892507180837,
+     "skew": -0.5943748161154225,
+     "kurtosis": 11.139498437943189,
+     "expected_max_sharpe_daily": 0.1209595261402548
+    }
+   }
+  },
+  {
+   "sha256": "ab1b7d24a50b7089198e16393fdf919f6618add2391303638e319b3f1ee78ab3",
+   "seq": 39,
+   "kind": "family-oos",
+   "subject": "F005-slots-momentum-4h",
+   "prev_sha256": "ad4234674756e4dfcd4c45229d2f5596b29995ef7889f56226c5f72710b5fd76",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 13.698447899756715,
+    "port_drawdown_pct": -35.62228854236377,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": 9.7776749047916,
+    "mean_ex_top2_pct": 14.679581095102533,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "64f7a36e63ba3e329ce98240245dbdd33706315fbcb408ab754766210b46fec4",
+   "seq": 40,
+   "kind": "family-proposal",
+   "subject": "F006-slots-breakout-1d",
+   "prev_sha256": "ab1b7d24a50b7089198e16393fdf919f6618add2391303638e319b3f1ee78ab3",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1147,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 1023,
+    "reality_check_p": 0.007992007992007992,
+    "deflated_sharpe": {
+     "probability": 0.93782288657576,
+     "trials": 1147,
+     "sharpe_daily": 0.07978737838059771,
+     "skew": 0.3498763524625803,
+     "kurtosis": 6.019590763254179,
+     "expected_max_sharpe_daily": 0.032198294062878496
+    }
+   }
+  },
+  {
+   "sha256": "648cc82bc662beb2563079a8ee81eb0e217be828134bf235a4082203ea6bb829",
+   "seq": 41,
+   "kind": "family-oos",
+   "subject": "F006-slots-breakout-1d",
+   "prev_sha256": "64f7a36e63ba3e329ce98240245dbdd33706315fbcb408ab754766210b46fec4",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": true,
+   "result": {
+    "first_close_utc": "2026-03-02T00:00Z",
+    "last_close_utc": "2026-10-28T00:00Z",
+    "markets": 31,
+    "port_return_pct": 90.15503358648091,
+    "port_drawdown_pct": -23.484934249335588,
+    "hold_return_pct": 61.42856863968571,
+    "hold_drawdown_pct": -25.563235129948538,
+    "cash_return_pct": 2.6106261901929217,
+    "median_pct": 0.8862093173483743,
+    "mean_ex_top2_pct": 13.976964593837526,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": true,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "2b51e0555aabd08ac427a353a3407aa3021c4a04d85d52179af2412bc19df091",
+   "seq": 43,
+   "kind": "family-proposal",
+   "subject": "F007-slots-momentum-1d",
+   "prev_sha256": "da90bf742eec58e04b4d15ff54603a8190d3286be6f64dc3bd4393d3978a4d8a",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1159,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 1023,
+    "reality_check_p": 0.15084915084915085,
+    "deflated_sharpe": {
+     "probability": 0.818829052871515,
+     "trials": 1159,
+     "sharpe_daily": 0.0464930342848541,
+     "skew": -0.1043017386809346,
+     "kurtosis": 8.4976749528685,
+     "expected_max_sharpe_daily": 0.017872672092403688
+    }
+   }
+  },
+  {
+   "sha256": "bf644d9140b6bc82f9366c698c8903c515591915cd3e94b4e8fb4d5b8c772143",
+   "seq": 44,
+   "kind": "family-oos",
+   "subject": "F007-slots-momentum-1d",
+   "prev_sha256": "2b51e0555aabd08ac427a353a3407aa3021c4a04d85d52179af2412bc19df091",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-02T00:00Z",
+    "last_close_utc": "2026-10-28T00:00Z",
+    "markets": 31,
+    "port_return_pct": 45.77778529881768,
+    "port_drawdown_pct": -37.48623952852406,
+    "hold_return_pct": 61.42856863968571,
+    "hold_drawdown_pct": -25.563235129948538,
+    "cash_return_pct": 2.6106261901929217,
+    "median_pct": 4.120535509020895,
+    "mean_ex_top2_pct": 11.73415174285363,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "89006162e77f30220319954b77374a15ed0b57363fa33ba65c70a37b1b85a958",
+   "seq": 45,
+   "kind": "family-proposal",
+   "subject": "F008-voltarget-4h",
+   "prev_sha256": "bf644d9140b6bc82f9366c698c8903c515591915cd3e94b4e8fb4d5b8c772143",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1165,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 541,
+    "reality_check_p": 0.4325674325674326,
+    "deflated_sharpe": {
+     "probability": 0.5008681998011765,
+     "trials": 1165,
+     "sharpe_daily": 0.012602015900085686,
+     "skew": 0.12699020415231715,
+     "kurtosis": 7.596591514679675,
+     "expected_max_sharpe_daily": 0.01250842745149746
+    }
+   }
+  },
+  {
+   "sha256": "6ac98baa72049868043c82f1bae65829409dfd3b31fc607aaa17fb03fafd2e04",
+   "seq": 46,
+   "kind": "family-oos",
+   "subject": "F008-voltarget-4h",
+   "prev_sha256": "89006162e77f30220319954b77374a15ed0b57363fa33ba65c70a37b1b85a958",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 36.24457092993909,
+    "port_drawdown_pct": -14.166721650350212,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": 10.535936509025735,
+    "mean_ex_top2_pct": 18.011896688030866,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "5652a76af7e569adcf92a780faca7832dad9e1bc8f4ac972549cd21a0754991c",
+   "seq": 47,
+   "kind": "family-proposal",
+   "subject": "F009-voltarget-1d",
+   "prev_sha256": "6ac98baa72049868043c82f1bae65829409dfd3b31fc607aaa17fb03fafd2e04",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1171,
+    "this_proposal": 6
+   },
+   "significance": {
+    "days": 1023,
+    "reality_check_p": 0.3696303696303696,
+    "deflated_sharpe": {
+     "probability": 0.4921761182592444,
+     "trials": 1171,
+     "sharpe_daily": 0.009739788159073729,
+     "skew": 0.08402540469308113,
+     "kurtosis": 10.106972603706863,
+     "expected_max_sharpe_daily": 0.010353103396681775
+    }
+   }
+  },
+  {
+   "sha256": "c389612bb2a413562dc8f697b995efae9e4892c21b8394a9d16173fdb71ae28b",
+   "seq": 48,
+   "kind": "family-oos",
+   "subject": "F009-voltarget-1d",
+   "prev_sha256": "5652a76af7e569adcf92a780faca7832dad9e1bc8f4ac972549cd21a0754991c",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-02T00:00Z",
+    "last_close_utc": "2026-10-28T00:00Z",
+    "markets": 31,
+    "port_return_pct": 29.412999066525593,
+    "port_drawdown_pct": -11.848327570845907,
+    "hold_return_pct": 61.42856863968571,
+    "hold_drawdown_pct": -25.563235129948538,
+    "cash_return_pct": 2.6106261901929217,
+    "median_pct": 0.8862093173483743,
+    "mean_ex_top2_pct": 13.976964593837526,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "0f9003dc138fdfeca1ea8bcb1faccd64e05964fbb336ec32d886a1f4e3b62801",
+   "seq": 49,
+   "kind": "family-proposal",
+   "subject": "F010-xsmom-4h",
+   "prev_sha256": "c389612bb2a413562dc8f697b995efae9e4892c21b8394a9d16173fdb71ae28b",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1183,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 535,
+    "reality_check_p": 0.001998001998001998,
+    "deflated_sharpe": {
+     "probability": 0.6147070964780778,
+     "trials": 1183,
+     "sharpe_daily": 0.09365159338687849,
+     "skew": 0.06289564392694769,
+     "kurtosis": 8.581158936137403,
+     "expected_max_sharpe_daily": 0.08096491256762461
+    }
+   }
+  },
+  {
+   "sha256": "5dc9d187783f7dc827478caf4dab39bd3667f1b352802ea5fa738cafcece8df7",
+   "seq": 50,
+   "kind": "family-oos",
+   "subject": "F010-xsmom-4h",
+   "prev_sha256": "0f9003dc138fdfeca1ea8bcb1faccd64e05964fbb336ec32d886a1f4e3b62801",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-01T04:00Z",
+    "last_close_utc": "2026-10-28T12:00Z",
+    "markets": 31,
+    "port_return_pct": 73.83715907933295,
+    "port_drawdown_pct": -33.87025540199087,
+    "hold_return_pct": 60.745291377538855,
+    "hold_drawdown_pct": -26.50716712410682,
+    "cash_return_pct": 2.6253184103127936,
+    "median_pct": -0.09157487343507409,
+    "mean_ex_top2_pct": 11.934434446136954,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": false,
+     "funded": true
+    }
+   }
+  },
+  {
+   "sha256": "0566ed00a00dc9cd57697eb2664c370eebdfe8b53e95d6d483f04ef08f4fc785",
+   "seq": 51,
+   "kind": "family-proposal",
+   "subject": "F011-xsmom-1d",
+   "prev_sha256": "5dc9d187783f7dc827478caf4dab39bd3667f1b352802ea5fa738cafcece8df7",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "split": {
+    "in_sample": "bars closing before 2026-03-01T00:00:00+00:00",
+    "out_of_sample": "returns on bars closing after 2026-03-01T00:00:00+00:00; earlier bars are warm-up"
+   },
+   "trials": {
+    "global_after": 1195,
+    "this_proposal": 12
+   },
+   "significance": {
+    "days": 1023,
+    "reality_check_p": 0.005994005994005994,
+    "deflated_sharpe": {
+     "probability": 0.8076271461735588,
+     "trials": 1195,
+     "sharpe_daily": 0.08201814961463039,
+     "skew": -0.15418627111468006,
+     "kurtosis": 10.67652222582687,
+     "expected_max_sharpe_daily": 0.05443920151555855
+    }
+   }
+  },
+  {
+   "sha256": "a03d18a18fe0f0edde94dbcb58ef1e5b4161c90a3e6478e99ecca0e6463c3ac6",
+   "seq": 52,
+   "kind": "family-oos",
+   "subject": "F011-xsmom-1d",
+   "prev_sha256": "0566ed00a00dc9cd57697eb2664c370eebdfe8b53e95d6d483f04ef08f4fc785",
+   "written_utc": "2026-10-28T13:08:01+00:00",
+   "in_sample_overlap_days": 0.0,
+   "passes": false,
+   "result": {
+    "first_close_utc": "2026-03-02T00:00Z",
+    "last_close_utc": "2026-10-28T00:00Z",
+    "markets": 31,
+    "port_return_pct": 124.3292780956355,
+    "port_drawdown_pct": -27.876474200816837,
+    "hold_return_pct": 61.42856863968571,
+    "hold_drawdown_pct": -25.563235129948538,
+    "cash_return_pct": 2.6106261901929217,
+    "median_pct": 6.753213612357367,
+    "mean_ex_top2_pct": 19.290542145598206,
+    "funding_hours_missing": 0,
+    "clauses": {
+     "positive": true,
+     "beats_cash": true,
+     "beats_hold": false,
+     "not_carried": true,
+     "funded": true
+    }
+   }
+  }
+ ]
+}

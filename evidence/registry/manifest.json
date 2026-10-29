@@ -1,0 +1,420 @@
+{
+ "records": [
+  {
+   "file": "0001-proposal-C001-funding_exit.json",
+   "kind": "proposal",
+   "prev_sha256": null,
+   "seq": 1,
+   "sha256": "2d016676b36cee0a1ee571b0ae38dc48ee97b77003e2303f85d12e17967e8613",
+   "subject": "C001-funding_exit"
+  },
+  {
+   "file": "0002-oos-C001-funding_exit.json",
+   "kind": "oos",
+   "prev_sha256": "2d016676b36cee0a1ee571b0ae38dc48ee97b77003e2303f85d12e17967e8613",
+   "seq": 2,
+   "sha256": "ea9a9ce8c58d3379725855041fc45b6ce51308051d27ab53e76d6621cad866b7",
+   "subject": "C001-funding_exit"
+  },
+  {
+   "file": "0003-freeze-C001-funding_exit.json",
+   "kind": "freeze",
+   "prev_sha256": "ea9a9ce8c58d3379725855041fc45b6ce51308051d27ab53e76d6621cad866b7",
+   "seq": 3,
+   "sha256": "3e33d79c45198c4797bb94ae3d0f6ca68a65f3ac41bcc131aedfe8a79522702f",
+   "subject": "C001-funding_exit"
+  },
+  {
+   "file": "0004-oos-correction-C001-funding_exit.json",
+   "kind": "oos-correction",
+   "prev_sha256": "3e33d79c45198c4797bb94ae3d0f6ca68a65f3ac41bcc131aedfe8a79522702f",
+   "seq": 4,
+   "sha256": "75edea9be92761a423ffc4c2d6a752a41ddf81db77f4644100addfea5c2b5aa7",
+   "subject": "C001-funding_exit"
+  },
+  {
+   "file": "0005-proposal-C002-breakout_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "75edea9be92761a423ffc4c2d6a752a41ddf81db77f4644100addfea5c2b5aa7",
+   "seq": 5,
+   "sha256": "c079993592c438a3420a70997cafce4389099dfb7c012152224b1bbd480d159b",
+   "subject": "C002-breakout_levered"
+  },
+  {
+   "file": "0006-oos-C002-breakout_levered.json",
+   "kind": "oos",
+   "prev_sha256": "c079993592c438a3420a70997cafce4389099dfb7c012152224b1bbd480d159b",
+   "seq": 6,
+   "sha256": "4c13c7a33a003dce78493c7550f2e526f9371e6d1e6f5a4ca3b48384a8f411aa",
+   "subject": "C002-breakout_levered"
+  },
+  {
+   "file": "0007-proposal-C003-fast_breakout_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "4c13c7a33a003dce78493c7550f2e526f9371e6d1e6f5a4ca3b48384a8f411aa",
+   "seq": 7,
+   "sha256": "410cc8ebf187c7029e9207da26912df9efe074add78d07cfb0ba14fb2b1a4b92",
+   "subject": "C003-fast_breakout_levered"
+  },
+  {
+   "file": "0008-oos-C003-fast_breakout_levered.json",
+   "kind": "oos",
+   "prev_sha256": "410cc8ebf187c7029e9207da26912df9efe074add78d07cfb0ba14fb2b1a4b92",
+   "seq": 8,
+   "sha256": "54e799b19ac93671aa9ca7edd3344f156ac6015e4414253f05f619ebdc1b4eb8",
+   "subject": "C003-fast_breakout_levered"
+  },
+  {
+   "file": "0009-proposal-C004-breadth_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "54e799b19ac93671aa9ca7edd3344f156ac6015e4414253f05f619ebdc1b4eb8",
+   "seq": 9,
+   "sha256": "8d4502e25b8be7b9e0fcf404eeb6cd5276b320eedfba7675257353efff34ca87",
+   "subject": "C004-breadth_levered"
+  },
+  {
+   "file": "0010-oos-C004-breadth_levered.json",
+   "kind": "oos",
+   "prev_sha256": "8d4502e25b8be7b9e0fcf404eeb6cd5276b320eedfba7675257353efff34ca87",
+   "seq": 10,
+   "sha256": "d066b85340a6e7781b77719251eabfd3a12d036d78a09745712220fc396e6093",
+   "subject": "C004-breadth_levered"
+  },
+  {
+   "file": "0011-decision-breadth-trend.json",
+   "kind": "decision",
+   "prev_sha256": "d066b85340a6e7781b77719251eabfd3a12d036d78a09745712220fc396e6093",
+   "seq": 11,
+   "sha256": "200f509f6b6e219250a45e586d551923ac7a51cf4291e0f41b66fada1a949d96",
+   "subject": "breadth-trend"
+  },
+  {
+   "file": "0012-decision-breadth-trend-100.json",
+   "kind": "decision",
+   "prev_sha256": "200f509f6b6e219250a45e586d551923ac7a51cf4291e0f41b66fada1a949d96",
+   "seq": 12,
+   "sha256": "ccde7ea393099734b346992dcf7904b6131be7f48d2b83edad58200b7a242ca5",
+   "subject": "breadth-trend-100"
+  },
+  {
+   "file": "0013-decision-breadth-trend-150.json",
+   "kind": "decision",
+   "prev_sha256": "ccde7ea393099734b346992dcf7904b6131be7f48d2b83edad58200b7a242ca5",
+   "seq": 13,
+   "sha256": "cc677afaecd6941b2c378aa58b9c2b7e542903ea55f5e089c77d0c4b377fda51",
+   "subject": "breadth-trend-150"
+  },
+  {
+   "file": "0014-decision-cross-100-200.json",
+   "kind": "decision",
+   "prev_sha256": "cc677afaecd6941b2c378aa58b9c2b7e542903ea55f5e089c77d0c4b377fda51",
+   "seq": 14,
+   "sha256": "7d785a3627f5926c391c07c3632ebd7c83a08a877ffdb7ac493ae140c005db0f",
+   "subject": "cross-100-200"
+  },
+  {
+   "file": "0015-decision-cross-50-200.json",
+   "kind": "decision",
+   "prev_sha256": "7d785a3627f5926c391c07c3632ebd7c83a08a877ffdb7ac493ae140c005db0f",
+   "seq": 15,
+   "sha256": "381e804857b58fe47d8b9494bb7256373853c20732c4317fdb9f4f24268c2e04",
+   "subject": "cross-50-200"
+  },
+  {
+   "file": "0016-decision-momentum-150.json",
+   "kind": "decision",
+   "prev_sha256": "381e804857b58fe47d8b9494bb7256373853c20732c4317fdb9f4f24268c2e04",
+   "seq": 16,
+   "sha256": "e1e35cf6e45cec83f5e36deaddbfbbf514f65344042682749c6b7249bda7bd32",
+   "subject": "momentum-150"
+  },
+  {
+   "file": "0017-decision-momentum-200.json",
+   "kind": "decision",
+   "prev_sha256": "e1e35cf6e45cec83f5e36deaddbfbbf514f65344042682749c6b7249bda7bd32",
+   "seq": 17,
+   "sha256": "f121ce5a54b8343e9792205bde2bea563387d59a46b78e0752e94380e89b88ba",
+   "subject": "momentum-200"
+  },
+  {
+   "file": "0018-decision-momentum-320.json",
+   "kind": "decision",
+   "prev_sha256": "f121ce5a54b8343e9792205bde2bea563387d59a46b78e0752e94380e89b88ba",
+   "seq": 18,
+   "sha256": "ce1b346f4696d98946bb109b85079294caa360b2b5f4380dd664a98cbff813dc",
+   "subject": "momentum-320"
+  },
+  {
+   "file": "0019-decision-sma-200.json",
+   "kind": "decision",
+   "prev_sha256": "ce1b346f4696d98946bb109b85079294caa360b2b5f4380dd664a98cbff813dc",
+   "seq": 19,
+   "sha256": "515aa376f9ebc9b70bccc1b6540682682fc8bbf0fba14bdae43cb695845a0fbe",
+   "subject": "sma-200"
+  },
+  {
+   "file": "0020-proposal-C005-breakout_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "515aa376f9ebc9b70bccc1b6540682682fc8bbf0fba14bdae43cb695845a0fbe",
+   "seq": 20,
+   "sha256": "8a9c8558b8f05a61ff5d08e3afe2f60aaab235d035d8159db889017147bc1999",
+   "subject": "C005-breakout_levered"
+  },
+  {
+   "file": "0021-oos-C005-breakout_levered.json",
+   "kind": "oos",
+   "prev_sha256": "8a9c8558b8f05a61ff5d08e3afe2f60aaab235d035d8159db889017147bc1999",
+   "seq": 21,
+   "sha256": "5fd15c635b348ab207a49aef6a04efa94bbfdee856baa33d9472a4cbb86a06d6",
+   "subject": "C005-breakout_levered"
+  },
+  {
+   "file": "0022-proposal-C006-fast_breakout_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "5fd15c635b348ab207a49aef6a04efa94bbfdee856baa33d9472a4cbb86a06d6",
+   "seq": 22,
+   "sha256": "05451759b19f0a78c64e60e64d1032f91228ae6f0eaf22783ed8a09e9320c28c",
+   "subject": "C006-fast_breakout_levered"
+  },
+  {
+   "file": "0023-oos-C006-fast_breakout_levered.json",
+   "kind": "oos",
+   "prev_sha256": "05451759b19f0a78c64e60e64d1032f91228ae6f0eaf22783ed8a09e9320c28c",
+   "seq": 23,
+   "sha256": "753c5503979b7a172b126e12a1fa5d73e7477fecd03714c8e7de126b373f2bf0",
+   "subject": "C006-fast_breakout_levered"
+  },
+  {
+   "file": "0024-proposal-C007-breadth_levered.json",
+   "kind": "proposal",
+   "prev_sha256": "753c5503979b7a172b126e12a1fa5d73e7477fecd03714c8e7de126b373f2bf0",
+   "seq": 24,
+   "sha256": "e811ed1d6791f487b7b04559e9a4b232853467a5817866226a950710e19e4ce0",
+   "subject": "C007-breadth_levered"
+  },
+  {
+   "file": "0025-oos-C007-breadth_levered.json",
+   "kind": "oos",
+   "prev_sha256": "e811ed1d6791f487b7b04559e9a4b232853467a5817866226a950710e19e4ce0",
+   "seq": 25,
+   "sha256": "dd60db27cca699e91b8b032e329101461329740038e047524ea4f508c977117c",
+   "subject": "C007-breadth_levered"
+  },
+  {
+   "file": "0026-decision-breadth-trend.json",
+   "kind": "decision",
+   "prev_sha256": "dd60db27cca699e91b8b032e329101461329740038e047524ea4f508c977117c",
+   "seq": 26,
+   "sha256": "ceecbc1b5dfe07b0e623f67ca6ba4515caaa5715d4fefe8a37457cb0cb65cbae",
+   "subject": "breadth-trend"
+  },
+  {
+   "file": "0027-decision-breadth-trend-100.json",
+   "kind": "decision",
+   "prev_sha256": "ceecbc1b5dfe07b0e623f67ca6ba4515caaa5715d4fefe8a37457cb0cb65cbae",
+   "seq": 27,
+   "sha256": "964036116787cae8750318ef4382c7b6a0715fa25e3c11f2d97e06374dae8b43",
+   "subject": "breadth-trend-100"
+  },
+  {
+   "file": "0028-decision-breadth-trend-150.json",
+   "kind": "decision",
+   "prev_sha256": "964036116787cae8750318ef4382c7b6a0715fa25e3c11f2d97e06374dae8b43",
+   "seq": 28,
+   "sha256": "b679454e163be55962ca37a4afc941369f3ad7d7cca2833934da5e7024b90908",
+   "subject": "breadth-trend-150"
+  },
+  {
+   "file": "0029-family-proposal-F001-carry-1d.json",
+   "kind": "family-proposal",
+   "prev_sha256": "b679454e163be55962ca37a4afc941369f3ad7d7cca2833934da5e7024b90908",
+   "seq": 29,
+   "sha256": "2a2e01d50e19d6d0491c7a466c2ffa59122ab162e4a0cad6ea13f82c89738f3f",
+   "subject": "F001-carry-1d"
+  },
+  {
+   "file": "0030-family-oos-F001-carry-1d.json",
+   "kind": "family-oos",
+   "prev_sha256": "2a2e01d50e19d6d0491c7a466c2ffa59122ab162e4a0cad6ea13f82c89738f3f",
+   "seq": 30,
+   "sha256": "1221174bd610b1a79f685b2cb9a7c85228c9093c67ac29919677bef6b17d2e84",
+   "subject": "F001-carry-1d"
+  },
+  {
+   "file": "0031-family-proposal-F002-ensemble-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "1221174bd610b1a79f685b2cb9a7c85228c9093c67ac29919677bef6b17d2e84",
+   "seq": 31,
+   "sha256": "901a529069a4ccc2b98e6b051455a9205573b3ddc0b5f77bb14645a11c759bfb",
+   "subject": "F002-ensemble-4h"
+  },
+  {
+   "file": "0032-family-oos-F002-ensemble-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "901a529069a4ccc2b98e6b051455a9205573b3ddc0b5f77bb14645a11c759bfb",
+   "seq": 32,
+   "sha256": "fd9f7f2d511be6234f719460739ae12761ed0b31ccdf801c87e7f8087d207e87",
+   "subject": "F002-ensemble-4h"
+  },
+  {
+   "file": "0033-family-proposal-F003-mtf-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "fd9f7f2d511be6234f719460739ae12761ed0b31ccdf801c87e7f8087d207e87",
+   "seq": 33,
+   "sha256": "9ae5ddb72726db69d0810e631bf02b9f6bedb9acef657ad61f67d3b25b8e046a",
+   "subject": "F003-mtf-4h"
+  },
+  {
+   "file": "0034-family-oos-F003-mtf-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "9ae5ddb72726db69d0810e631bf02b9f6bedb9acef657ad61f67d3b25b8e046a",
+   "seq": 34,
+   "sha256": "06996d6d623b9f29e3b0e581c1359b90bdc1ede6e43ab35e5d59a8cc8819c263",
+   "subject": "F003-mtf-4h"
+  },
+  {
+   "file": "0035-family-proposal-F004-slots-breakout-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "06996d6d623b9f29e3b0e581c1359b90bdc1ede6e43ab35e5d59a8cc8819c263",
+   "seq": 35,
+   "sha256": "ca4e2124c6dec4fe9266c3b9d3d6c367fa8e949b41fa87afc8222682db9e9a5e",
+   "subject": "F004-slots-breakout-4h"
+  },
+  {
+   "file": "0036-family-oos-F004-slots-breakout-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "ca4e2124c6dec4fe9266c3b9d3d6c367fa8e949b41fa87afc8222682db9e9a5e",
+   "seq": 36,
+   "sha256": "f8772a215ca127de7f03299b433eaa85932c4d369b6c73cd618f14a4cde029a8",
+   "subject": "F004-slots-breakout-4h"
+  },
+  {
+   "file": "0037-family-freeze-F004-slots-breakout-4h.json",
+   "kind": "family-freeze",
+   "prev_sha256": "f8772a215ca127de7f03299b433eaa85932c4d369b6c73cd618f14a4cde029a8",
+   "seq": 37,
+   "sha256": "565dfb15618f752a37718b2cb3854c715c5e0b65f67bdc03b46b1c2bd1dbcb7a",
+   "subject": "F004-slots-breakout-4h"
+  },
+  {
+   "file": "0038-family-proposal-F005-slots-momentum-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "565dfb15618f752a37718b2cb3854c715c5e0b65f67bdc03b46b1c2bd1dbcb7a",
+   "seq": 38,
+   "sha256": "ad4234674756e4dfcd4c45229d2f5596b29995ef7889f56226c5f72710b5fd76",
+   "subject": "F005-slots-momentum-4h"
+  },
+  {
+   "file": "0039-family-oos-F005-slots-momentum-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "ad4234674756e4dfcd4c45229d2f5596b29995ef7889f56226c5f72710b5fd76",
+   "seq": 39,
+   "sha256": "ab1b7d24a50b7089198e16393fdf919f6618add2391303638e319b3f1ee78ab3",
+   "subject": "F005-slots-momentum-4h"
+  },
+  {
+   "file": "0040-family-proposal-F006-slots-breakout-1d.json",
+   "kind": "family-proposal",
+   "prev_sha256": "ab1b7d24a50b7089198e16393fdf919f6618add2391303638e319b3f1ee78ab3",
+   "seq": 40,
+   "sha256": "64f7a36e63ba3e329ce98240245dbdd33706315fbcb408ab754766210b46fec4",
+   "subject": "F006-slots-breakout-1d"
+  },
+  {
+   "file": "0041-family-oos-F006-slots-breakout-1d.json",
+   "kind": "family-oos",
+   "prev_sha256": "64f7a36e63ba3e329ce98240245dbdd33706315fbcb408ab754766210b46fec4",
+   "seq": 41,
+   "sha256": "648cc82bc662beb2563079a8ee81eb0e217be828134bf235a4082203ea6bb829",
+   "subject": "F006-slots-breakout-1d"
+  },
+  {
+   "file": "0042-family-freeze-F006-slots-breakout-1d.json",
+   "kind": "family-freeze",
+   "prev_sha256": "648cc82bc662beb2563079a8ee81eb0e217be828134bf235a4082203ea6bb829",
+   "seq": 42,
+   "sha256": "da90bf742eec58e04b4d15ff54603a8190d3286be6f64dc3bd4393d3978a4d8a",
+   "subject": "F006-slots-breakout-1d"
+  },
+  {
+   "file": "0043-family-proposal-F007-slots-momentum-1d.json",
+   "kind": "family-proposal",
+   "prev_sha256": "da90bf742eec58e04b4d15ff54603a8190d3286be6f64dc3bd4393d3978a4d8a",
+   "seq": 43,
+   "sha256": "2b51e0555aabd08ac427a353a3407aa3021c4a04d85d52179af2412bc19df091",
+   "subject": "F007-slots-momentum-1d"
+  },
+  {
+   "file": "0044-family-oos-F007-slots-momentum-1d.json",
+   "kind": "family-oos",
+   "prev_sha256": "2b51e0555aabd08ac427a353a3407aa3021c4a04d85d52179af2412bc19df091",
+   "seq": 44,
+   "sha256": "bf644d9140b6bc82f9366c698c8903c515591915cd3e94b4e8fb4d5b8c772143",
+   "subject": "F007-slots-momentum-1d"
+  },
+  {
+   "file": "0045-family-proposal-F008-voltarget-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "bf644d9140b6bc82f9366c698c8903c515591915cd3e94b4e8fb4d5b8c772143",
+   "seq": 45,
+   "sha256": "89006162e77f30220319954b77374a15ed0b57363fa33ba65c70a37b1b85a958",
+   "subject": "F008-voltarget-4h"
+  },
+  {
+   "file": "0046-family-oos-F008-voltarget-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "89006162e77f30220319954b77374a15ed0b57363fa33ba65c70a37b1b85a958",
+   "seq": 46,
+   "sha256": "6ac98baa72049868043c82f1bae65829409dfd3b31fc607aaa17fb03fafd2e04",
+   "subject": "F008-voltarget-4h"
+  },
+  {
+   "file": "0047-family-proposal-F009-voltarget-1d.json",
+   "kind": "family-proposal",
+   "prev_sha256": "6ac98baa72049868043c82f1bae65829409dfd3b31fc607aaa17fb03fafd2e04",
+   "seq": 47,
+   "sha256": "5652a76af7e569adcf92a780faca7832dad9e1bc8f4ac972549cd21a0754991c",
+   "subject": "F009-voltarget-1d"
+  },
+  {
+   "file": "0048-family-oos-F009-voltarget-1d.json",
+   "kind": "family-oos",
+   "prev_sha256": "5652a76af7e569adcf92a780faca7832dad9e1bc8f4ac972549cd21a0754991c",
+   "seq": 48,
+   "sha256": "c389612bb2a413562dc8f697b995efae9e4892c21b8394a9d16173fdb71ae28b",
+   "subject": "F009-voltarget-1d"
+  },
+  {
+   "file": "0049-family-proposal-F010-xsmom-4h.json",
+   "kind": "family-proposal",
+   "prev_sha256": "c389612bb2a413562dc8f697b995efae9e4892c21b8394a9d16173fdb71ae28b",
+   "seq": 49,
+   "sha256": "0f9003dc138fdfeca1ea8bcb1faccd64e05964fbb336ec32d886a1f4e3b62801",
+   "subject": "F010-xsmom-4h"
+  },
+  {
+   "file": "0050-family-oos-F010-xsmom-4h.json",
+   "kind": "family-oos",
+   "prev_sha256": "0f9003dc138fdfeca1ea8bcb1faccd64e05964fbb336ec32d886a1f4e3b62801",
+   "seq": 50,
+   "sha256": "5dc9d187783f7dc827478caf4dab39bd3667f1b352802ea5fa738cafcece8df7",
+   "subject": "F010-xsmom-4h"
+  },
+  {
+   "file": "0051-family-proposal-F011-xsmom-1d.json",
+   "kind": "family-proposal",
+   "prev_sha256": "5dc9d187783f7dc827478caf4dab39bd3667f1b352802ea5fa738cafcece8df7",
+   "seq": 51,
+   "sha256": "0566ed00a00dc9cd57697eb2664c370eebdfe8b53e95d6d483f04ef08f4fc785",
+   "subject": "F011-xsmom-1d"
+  },
+  {
+   "file": "0052-family-oos-F011-xsmom-1d.json",
+   "kind": "family-oos",
+   "prev_sha256": "0566ed00a00dc9cd57697eb2664c370eebdfe8b53e95d6d483f04ef08f4fc785",
+   "seq": 52,
+   "sha256": "a03d18a18fe0f0edde94dbcb58ef1e5b4161c90a3e6478e99ecca0e6463c3ac6",
+   "subject": "F011-xsmom-1d"
+  }
+ ]
+}
