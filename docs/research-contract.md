@@ -47,9 +47,9 @@ runs, the registry records only coverage, never a return. The result is written 
 window has closed with every bar and every hourly funding settlement on record. A hole anywhere
 leaves it `incomplete` and unscored.
 
-A trial can also be read every day by a sequential test, but only if that test's plan was
-written into the registry before the trial's first bar. The test is an always-valid confidence
-sequence, so reading it daily spends no more error than reading it once.
+New sweeps use the fixed forward window. Older records retain their preregistered sequential
+plans and results; the [methodology](methodology.md#historical-read-then-trial) describes their
+nominal confidence levels and unverified time-uniform calibration.
 
 If the strategy's code has changed since the freeze, scoring is refused. A frozen candidate
 can't be re-fitted to its own test.
@@ -70,17 +70,24 @@ whose PBO is above 0.5 proposes nothing and spends no unseen read.
 ## 6. The gates are fixed in code
 
 Listing and withdrawal run on gates in code. Changing one is a code change with its own commit,
-never a setting, and the decisions made before the change stay in the record. A candidate is listed when all four
-hold: its one unseen read passed cleanly, the luck figures pass, its trial passed, and the
-trading engine reproduces exactly the curve the desk measured. No person approves a listing and
-no person can force one. [Listing](promotion.md) has the detail.
+never a setting, and the decisions made before the change stay in the record. A Proven
+candidate passes the unseen read, luck, trial and engine gates. A Qualified candidate may list
+before its trial ends if its additional qualification gates pass and the trial has not failed.
+Qualification checks value-bound receipts and exposure references against a reviewed ledger.
+Each measured leg also needs applicable provenance and a review of broader data exposure.
+The engine gate compares the planner with fixed equal-weight shares or positions sized at
+entry, as measured. It checks allocation without fees, funding or halts; executed-order
+parity requires reconciliation with venue fills. Listing follows these gates automatically.
+[Listing](promotion.md) has the detail.
 
 ## 7. Costs are never optional
 
-Every replay charges 5 bps on each unit of exposure changed and the hourly funding
-each market settled, to the strategy and to the holding it's compared with. A held hour with no
-settlement on record fails the candidate outright. Holding starts on the strategy's own seed
-bar, so the comparison can't be flattered by starting them apart.
+The desk's realised-funding replay charges 5 bps on each unit of exposure changed
+and each market's settled funding to both strategy and holding. The breakout's cost-matched
+comparison uses realised funding; its older frozen constant-funding verdict charges funding
+only to the strategy and is reported separately. A held hour with no settlement on record
+fails the candidate outright. Holding starts on the strategy's own seed bar, keeping the
+comparison aligned from the start.
 
 ## 8. Rank by the middle, not the tail
 
@@ -90,8 +97,9 @@ the plain mean. One market that went up tenfold can make a weak strategy's avera
 ## 9. One record, append-only
 
 Every proposal, read, freeze, result and decision is a record in a registry chained by SHA-256.
-An edited, deleted, inserted or re-hashed record fails verification, and the desk refuses to
-write anything after it. A correction is a new record that names the old one.
+Verification detects broken links and stops the desk writing; comparison with an
+independently retained head detects a rewritten chain. A correction is a new record that
+names the old one.
 [The registry](registry.md) shows how, and the [reference code](../src/archon_contract/chain.py)
 lets anyone check it.
 

@@ -6,14 +6,22 @@ can push one through.
 
 ## The four gates
 
-A candidate is listed when all four hold.
+A Proven candidate is listed when all four hold. The separate Qualified route below can
+list earlier if its additional evidence gates pass and its trial has not failed.
 
 | Gate | Passes when |
 |---|---|
 | Unseen test | Its one read of unseen prices passed the listing bar, net of fees and realised funding, and scored no day the in-sample search had read. A correction never counts. |
 | Not luck | The reality check over its search has p under 0.10, and the deflated Sharpe against the global trial counter leaves under a 0.10 chance its edge is the best of that many skill-free tries. |
-| Trial | Its pre-registered sequential test proved it, or a frozen window of at least 30 days closed complete, the strategy made money over it, and its worst drawdown was no more than 1.5 times its in-sample one. |
+| Trial | The code accepts its pre-registered sequential result, or a frozen window of at least 30 days closed complete, the strategy made money over it, and its worst drawdown was no more than 1.5 times its in-sample one. |
 | The engine trades it | The live signal code gives the measured exposure on every stored bar of every market, and the planner, driving a simulated account on those signals, reproduces the measured curve. A market without enough history fails the gate instead of being skipped. |
+
+New sweeps use fixed forward windows; the [methodology](methodology.md#historical-read-then-trial)
+describes the nominal confidence levels and calibration status of legacy sequential results.
+
+The engine gate compares the planner with the construction actually measured: fixed
+equal-weight shares or positions sized at entry. This allocation comparison runs without
+fees, funding or halts. Executed-order parity requires reconciliation with venue fills.
 
 The last gate is why a candidate that measures well can still wait: until the live signal can
 compute it, nothing can trade it, so nothing lists it.
@@ -44,10 +52,16 @@ before any candidate was measured on it, and the `qualify` record is written onc
    of its edge on the median.
 6. **The edge is there.** A block bootstrap of its unseen daily excess gives a probability of at
    least 0.9 that the edge is above zero.
-7. **Named crises.** In each of 4 named market crises it never reaches the
-   30% halt and falls no further than holding the same markets.
+7. **Named crises.** In each of 4 named market crises it falls no further than holding
+   the same markets. A candidate whose record says it was measured with the halt, as every
+   one proposed before 31 October 2026 was, must also never reach the 30% halt
+   there.
 
-Its trial keeps running. A Qualified strategy whose trial fails is withdrawn for good.
+Qualification verifies value-bound receipts and each measured leg's exposure references
+against the reviewed ledger. Establishing independence also requires review of archive
+provenance and broader exposure history. Each candidate needs applicable verified evidence;
+its trial continues while that evidence is assessed. A Qualified strategy whose trial
+fails is withdrawn for good.
 
 ## The daily recheck
 

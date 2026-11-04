@@ -1,6 +1,7 @@
 # Evidence
 
-What the verify commands read, from Archon's research record.
+The research-record snapshot used by the verification commands. Its head hash identifies
+the snapshot for comparison with another copy or the desk's live feed.
 
 | File | What it is |
 |---|---|
@@ -8,9 +9,17 @@ What the verify commands read, from Archon's research record.
 | [`records.json`](records.json) | Every proposal and unseen test in the registry, passes and failures alike, as excerpts at full precision: no parameters, cells or per-market rows. Each carries the sha256 its manifest line lists. |
 
 ```sh
-python -m archon_contract evidence     # the manifest's chain, and each excerpt against its line
+python -m archon_contract evidence     # the manifest chain and excerpt identifying fields
 python -m archon_contract recompute    # the listing bar and the luck gate, rebuilt from the excerpts
 ```
+
+`evidence` verifies the manifest's sequence and hash links, then matches the identifying
+fields of each excerpt to its manifest entry. Authenticating all excerpted values against
+their record hashes requires the complete original records.
+
+`recompute` checks the listing and luck calculations using the excerpted figures.
+Reproducing the underlying backtests additionally requires their market data and scoring
+implementation.
 
 An unseen test whose record has no funding clause was written under the earlier bar, which is
 today's floor; `recompute` judges it by that and says so.

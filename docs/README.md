@@ -8,5 +8,6 @@
 | [The registry](registry.md) | Record kinds, the SHA-256 chain, the trial counter, one writer and research bundles, the public feed |
 | [Architecture](architecture.md) | Market data, trading and research, the three research loops, how a decision reaches the catalogue |
 
+The evidence snapshot has its own chain head for comparison with the desk's live feed.
 The evidence these documents cite is in [`../evidence/`](../evidence/), and the contract itself
 runs as code in [`../src/archon_contract/`](../src/archon_contract/).

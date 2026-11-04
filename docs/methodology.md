@@ -7,9 +7,10 @@ detail.
 ## Data
 
 The market store holds Hyperliquid's own candles and the hourly funding every perp settled,
-from the venue's public API. The research universe is the liquid perps of the day it was
-frozen, and every figure declares that survivorship. A wider store of perps above a daily
-volume floor serves in-sample research, with the same declaration.
+from the venue's public API. Each research store's receipt names the day it was fetched and
+any daily volume floor it applied, and every figure declares that survivorship: a market
+delisted or below the floor then is not in it. A strategy frozen for a forward window keeps
+the markets it was frozen on until the window closes.
 
 Bar width is a dimension of the search: a slice is 1h, 2h, 4h or 1d bars, funding is summed per
 bar whatever its width, and a warm-up is the same span of time on any width. The venue decides
@@ -19,14 +20,18 @@ to trial. The longer widths reach back as far as the stored funding does.
 
 ## Measuring a strategy
 
-A strategy is measured as the engine trades it. It's long or flat per market, either equal-weight
-across the universe or holding a set number of positions at once, each sized at entry and left
-to drift. Leverage multiplies the notional, and fees and funding are charged on the levered
-notional. Every measurement applies the account's 30% drawdown halt: from the
-first close that far under its peak, the account goes flat, as a deployed one would.
+Research records fixed equal-weight sleeves or a set number of positions sized at entry and
+left to drift, at 1x: strategies are found, ranked and listed unlevered. Fees and funding are charged on
+the notional held.
+The desk measures every candidate it has proposed since 31 October 2026 raw, with no account
+halt and no risk overlay, because the halt is a setting each account's owner chooses. Each
+candidate's record names how it was measured, and the candidate keeps that measurement through
+every test. One without that mark keeps the 30% drawdown halt it was measured
+with, modelled as a flat book after the trigger. Actual exits still depend on venue fills.
 
-The engine is held to this. A test drives the planner on a simulated account and checks it
-reproduces the desk's curve bar for bar at 1, 1.5 and 2x.
+Promotion checks that the planner reproduces the allocation construction actually measured:
+fixed equal-weight shares or positions sized at entry. This allocation check runs without
+fees, funding or halts; executed-order parity requires reconciliation with venue fills.
 
 ## The listing bar
 
@@ -35,11 +40,18 @@ the same markets from the same seed bar:
 
 1. The return is positive.
 2. It beats cash earning 4% a year over the same span.
-3. It beats holding by at least 5 points of return, with a worst drawdown no
-   deeper than holding's.
-4. It isn't carried by its winners: the median market return and the mean excluding the top two
-   are both positive.
-5. Every held market-hour was charged the funding it settled.
+3. It beats holding by at least 5 points of return for each year of the span,
+   never more than 5, with a worst drawdown no deeper than holding's.
+4. It isn't carried by its winners: per market, its return minus that market's own hold has a
+   median and a mean excluding the top two of at least zero.
+5. Every held market-hour was charged the funding it settled. Hours with no settlement on record
+   fail it above 0.1% of the market-hours it spans, and an hour the venue confirms it never
+   settled is charged the highest rate that market paid in the 12 hours before it.
+
+Every proposal and window records which bar it binds, and is judged on that one. A window
+frozen before this bar keeps the earlier one: a flat 5 points over holding,
+the median market return and the mean excluding the top two both positive, and no market-hour
+without its funding.
 
 Beside it sits the floor: the same bar with clause 3 met by at least
 5 points of return or by at least 10 points of
@@ -57,8 +69,9 @@ exactly what produced it.
 Sweeps run the same contract at volume. Each sweep declares its candidates, hashes the
 declaration with the code that decides and scores each one, and adds them to the trial counter
 before one is measured. A cursor beside the registry records every candidate ever declared, so
-each is measured once, ever, and repeated sweeps walk forward through the space in a seeded
-low-discrepancy order instead of finishing one corner first.
+each is declared once per cursor, and repeated sweeps walk forward through the space in a seeded
+low-discrepancy order instead of finishing one corner first. Declared trials stay counted
+even when measurement is interrupted.
 
 Measurement at that volume uses vectorised kernels, one market-by-bar matrix per slice. The
 kernels are held to the reference implementation to 1e-9 on every figure, and wherever float
@@ -70,8 +83,8 @@ measured again by the reference code, and a difference above 1e-6 stops the run.
 
 Selection reads only the in-sample slice:
 
-1. Eligible: the candidate passes the listing bar on the whole in-sample slice, and its account
-   halt never fired.
+1. Eligible: the candidate passes the listing bar on the whole in-sample slice, measured at 1x
+   with no account halt.
 2. Ranked by the median, across anchored folds of the in-sample days, of the mean daily excess
    over holding; then by the mean excluding the top two markets; then by the median market.
 3. De-duplicated: a candidate whose daily excess correlates above 0.9 with a better
@@ -110,32 +123,32 @@ an edge in noise and check each figure finds it. A proposal records the Sharpe, 
 day count and benchmark its deflated Sharpe was computed from, so `python -m archon_contract
 recompute` can rebuild the probability from the published record alone.
 
-## Unseen test, then trial
+## Historical read, then trial
 
-A finalist gets its one unseen read, written at once. A pass is frozen into a
+A finalist gets its one out-of-sample read, written at once. A pass is frozen into a
 60-day trial. Every sweep reads the same post-split slice, so for a sweep that
 read is a selection step rather than a holdout: the sweep adds one trial per read to the
 counter first, and its proposals are deflated against the count that includes them.
+The sweep's historical read stays marked as exposed in its result and frozen trial.
 
 Neighbours go on trial without any unseen read. They can never be listed, since listing needs a
 passing read, but their trials collect evidence on the finalists' neighbours on prices nobody
 has seen.
 
-A trial frozen with a plan is read once a day by an always-valid 95%
-confidence sequence on the daily return over holding, from day 21 to day
-60. It passes the first day its lower bound is above zero with a worst drawdown no
-deeper than holding's, and fails the first day its upper bound is below zero. Otherwise the
-window's own result at its close decides.
+New sweeps use fixed forward windows. Legacy sequential plans retain their nominal
+95% confidence level and daily checks from day 21 to day
+60, with their results preserved in the record. Their time-uniform calibration
+remains unverified; new sweeps leave that method out.
 
 ## Where the next budget goes
 
 The desk keeps a memory beside the registry, append-only and hash-chained like it: per group
 and per sweep, how many candidates it measured, how many beat the group's previous best in
-sample, the PBO and the finalists' unseen verdicts. When a sweep runs with a budget, Thompson
-sampling splits it across groups by each group's odds of producing an improvement, with an
-unseen verdict weighing ten candidates. A fifth of the budget is split evenly first, so no group
-with candidates left starves. A group still setting records gets more of the next sweep, and a
-group never tried gets explored.
+sample, the PBO and the finalists' historical verdicts. When a sweep runs with a budget, Thompson
+sampling uses out-of-sample pass/fail records: the same group has weight 1, a sibling bar width
+has weight 0.5, and a pooled pass-rate prior contributes two reads. In-sample improvement is
+recorded but does not enter that posterior. A fifth of the budget is reserved for an even
+allocation, rounded down per group; the remaining cells follow the draws.
 
 The memory never opens a slice and never copies an unseen figure. It only records what the
 registry already holds, and verification refuses a memory row that doesn't name its registry

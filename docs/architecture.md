@@ -2,8 +2,7 @@
 
 Archon has two halves that share one market store and one record. The trading half turns
 listed strategies into positions on Hyperliquid. The research half proposes, measures, freezes,
-lists and replaces those strategies. The only thing that crosses from research to trading is a
-decision record in the registry.
+lists and replaces those strategies. Decisions in the registry supply the catalogue that trading reads.
 
 ```mermaid
 flowchart LR
@@ -38,12 +37,21 @@ of the candle set and funding it read.
 
 ## Trading
 
-The engine is a planner. On each closed candle it reads the signals of the strategies a
-subscriber follows and plans target positions; the trader places the difference. The venue is
-the state: positions, equity and fills are read back from Hyperliquid on every cycle, so a
-restart, crash or redeploy changes nothing it shouldn't. Each account has a
-30% drawdown halt that persists across restarts and isn't tripped by deposits
-or withdrawals.
+The engine is a planner. On each closed candle it reads the signals of the strategy a
+subscriber chooses to run and plans target positions; the trader places the difference. The venue is
+the source for positions, equity and fills, read back on every cycle. An account may turn on a
+30% drawdown halt, or one at any level it sets; new accounts start with none. The worker saves a newly triggered halt
+before requesting exits, so an exit timeout cannot erase a saved halt. Its peak accounts
+for deposits and withdrawals. If storage fails, the running worker retains pending intent
+and retries before orders; unsaved intent cannot survive process loss. Remaining positions
+need confirmed fills, and real-position testnet acceptance remains open.
+
+Before the next order, the trader attempts to record acknowledged fills in hosted trade
+events or a private self-hosted journal. A failed write can leave a gap even if later orders
+continue; check errors and reconcile against the venue. A timed-out request without an
+acknowledgment remains unknown. These records do not replace a complete venue fill and cost
+reconciliation. Both engines also attempt private records of planned sizes, submitted
+sizes and received outcomes.
 
 The same engine runs hosted, for every hosted account, and self-hosted, on a subscriber's own
 machine. Either way it trades through a trading key (Hyperliquid calls them API wallets), which
@@ -52,17 +60,21 @@ never takes custody of funds.
 
 ## Research
 
-Three loops run at three speeds.
+Three research activities run at different speeds.
 
 New strategies are written as code: a module with a one-sentence economic reason, the
 candidates it will try and the signal. Whoever wrote one, it enters the contract on the same
 terms, and nothing it proposes reaches an account except through the gates.
 
-Sweeps run continuously on a copy of the record, in a bounded background container. Each round
+Sweeps can run on a copy of the record in a bounded background container. A round holds
+when required evidence or data is missing. When it runs, it
 brings its copy up to the server's record, declares and counts its candidates, measures and
-selects in sample, writes the proposals and reads, and queues the result as a bundle.
+selects in sample, writes the proposals and reads, and queues the result as a bundle. When no
+source has candidates left to count, the container runs the null desk instead. It puts the whole
+funnel through markets with no edge and counts how often it would list one anyway. Its results
+stay in their own store, never in the record or on the trial counter.
 
-The desk runs once a day on the server: it verifies the registry, adopts queued bundles, scores
+The desk runs once a day on the server: it adopts queued bundles, verifies the registry, scores
 trials that have closed or proved themselves, runs listing and the daily recheck, and writes the
 daily report. The report opens with a few plain sentences for subscribers (how many markets a
 strategy is holding, whether most markets are rising, what funding is costing) and then the full
@@ -88,4 +100,4 @@ When the desk lists a strategy, the decision record carries the catalogue entry:
 bar width and fee. The catalogue reads the latest decision per strategy, so a listing adds a
 strategy subscribers can choose, an upgrade keeps one listed with its notice, and a withdrawal
 takes one off the list on offer. A decision never changes what an existing account is already
-trading; subscribers choose what they follow.
+trading; subscribers choose what they run. Following signals does not change that choice.

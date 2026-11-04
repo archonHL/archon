@@ -1,9 +1,8 @@
 # The registry
 
-Everything the desk does is written down once, in order, in a registry nobody can edit after
-the fact. It's the reason a listing means something: anyone holding the records can replay the
-chain and see that the proposal came before the read, the read before the freeze, and the freeze
-before the trial opened.
+The desk writes its records in order to a hash-chained registry. Anyone holding the records
+can replay the chain and check the sequence: the proposal before the read, the read before
+the freeze, and the freeze before the trial opened.
 
 ## Records
 
@@ -20,8 +19,8 @@ Each record is one JSON file, numbered in the order written and never changed af
 | `forward-result`, `family-forward-result` | The trial has closed with every bar and settlement on record. Written once. |
 | `decision` | A listing, withdrawal, upgrade or restore, with every gate's figures and the hashes of the records it rests on. |
 
-Every record also carries the sha256 of the candles and funding it read, and its declarations:
-universe and survivorship, history cap, funding coverage, costs not modelled.
+Research measurements carry the hashes and declarations for the data they read, including
+universe and survivorship, history cap, funding coverage and costs not modelled.
 
 ## The chain
 
@@ -33,10 +32,11 @@ every record carries its sequence number and its predecessor's hash inside it. S
 - a deleted record leaves a gap in the sequence;
 - a record slipped in isn't in the manifest, or breaks the links after it.
 
-Each of those fails verification, and the desk refuses to write anything once verification
-fails. Writers take an exclusive lock on the registry and readers a shared one, and every file
-is written to a temporary name and renamed, so a reader never sees half a record or a record its
-manifest doesn't list yet.
+Verification detects those changes against the existing chain, and the desk refuses to
+write when verification fails. Comparing the head with an independently retained one also
+detects replacement of the entire chain. Writers take an exclusive lock on the registry
+and readers a shared one. Each file is written to a temporary name and renamed, so readers
+see complete records with their manifest entries.
 
 ## The trial counter
 
@@ -77,8 +77,9 @@ python -m archon_contract evidence
 ```
 
 `evidence` checks the shipped manifest: its lines are numbered in order, each names the hash of
-the line before it, and every excerpt in [`records.json`](../evidence/records.json) is the
-record its manifest line lists. The record bodies stay on the desk, so this checks the manifest's
-own chain rather than every byte of every record; the head hash it prints is the one the desk's
-public feed serves. [`chain.py`](../src/archon_contract/chain.py) is the verifier, and
-`python -m archon_contract demo` writes three records, edits one and shows verification refuse it.
+the line before it, and each excerpt in [`records.json`](../evidence/records.json) has
+identifying fields matching its manifest line. The command prints the snapshot's head hash
+for comparison with other copies or the live feed. The [verification guide](../evidence/)
+defines the scope of these checks. [`chain.py`](../src/archon_contract/chain.py) is the verifier,
+and `python -m archon_contract demo` writes three records, edits one and shows verification
+refuse it.
