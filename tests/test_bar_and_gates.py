@@ -41,9 +41,11 @@ def test_one_unfunded_hour_fails_the_strategy():
     assert not bar.passes(m(unfunded_hours=1))
 
 
-def test_record_0026_fails_the_bar_and_clears_the_floor():
+def test_record_0026_fails_the_bar():
+    """Breadth Trend's walk-forward: shallower than holding, and 24 points behind it. It is not listed."""
     assert not bar.passes(RECORD_0026)
-    assert bar.passes_floor(RECORD_0026)
+    assert not bar.clauses(RECORD_0026)['beats_hold']
+    assert all(ok for name, ok in bar.clauses(RECORD_0026).items() if name != 'beats_hold')
 
 
 def test_cash_earns_four_percent_a_year():

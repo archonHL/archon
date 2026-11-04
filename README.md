@@ -43,8 +43,8 @@ from a fresh clone.
    Qualified candidate can list before its trial closes if it passes the separate qualification
    gates and its trial has not failed.
 
-Every listed strategy is rechecked daily. One that slips but clears the floor and drawdown
-limit stays listed while it is upgraded; a breach of those limits can withdraw it.
+Every listed strategy is rechecked daily. One that no longer beats holding on both return and
+worst fall, or breaks its drawdown limit, is withdrawn that day. The catalogue may be empty.
 
 ## Verify it yourself
 
@@ -85,7 +85,7 @@ contract closes one way of fooling yourself, and each is code with a test.
 | Hash-chained registry | Changes that break the chain. Verification checks the links, and comparison with an independently retained head detects a rewritten chain. |
 | Gates in code | Judgement calls. No person approves a listing, and no person can force one. |
 | Costs on every replay | Edges that exist only before costs. The realised-funding replay charges fees and settled funding to both strategy and holding; the cost-matched comparison uses that replay. |
-| Replace, never empty | A catalogue that empties whenever the market turns. A strategy that slips but clears the floor and drawdown limit stays listed until a stronger one passes every gate. |
+| Listed only while it beats holding | A strategy kept on offer after it stopped beating holding. One that misses the bar is withdrawn, even if nothing replaces it. |
 
 ## Layout
 

@@ -46,7 +46,7 @@ def days_between(first_utc: str, last_utc: str) -> float:
 
 def unseen_test(r: dict) -> tuple[bool, str]:
     """The listing bar rebuilt from an unseen test's figures. A record with no funding clause was
-    written under the earlier bar, which is today's floor, and is judged by that."""
+    written under the bar before 2026-10-28, and is judged by that."""
     res = r['result']
     m = bar.Measurement(
         return_pct=res['port_return_pct'], drawdown_pct=res['port_drawdown_pct'],
@@ -55,11 +55,11 @@ def unseen_test(r: dict) -> tuple[bool, str]:
         median_market_pct=res['median_pct'], mean_ex_top2_pct=res['mean_ex_top2_pct'],
         unfunded_hours=res.get('funding_hours_missing', 0))
     earlier = 'funded' not in res['clauses']
-    judged = bar.floor_clauses(m) if earlier else bar.clauses(m)
+    judged = bar.earlier_clauses(m) if earlier else bar.clauses(m)
     clauses = {k: judged[k] for k in res['clauses']}
     passes = all(clauses.values())
     same = clauses == res['clauses'] and passes == r['passes']
-    which = 'earlier bar (today\'s floor)' if earlier else 'bar'
+    which = 'earlier bar' if earlier else 'bar'
     return same, (f'{which} {"pass" if passes else "fail"}: {m.return_pct:+.1f}% against holding\'s '
                   f'{m.hold_return_pct:+.1f}%, worst drawdown {m.drawdown_pct:.1f}% against {m.hold_drawdown_pct:.1f}%')
 

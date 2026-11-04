@@ -21,5 +21,5 @@ their record hashes requires the complete original records.
 Reproducing the underlying backtests additionally requires their market data and scoring
 implementation.
 
-An unseen test whose record has no funding clause was written under the earlier bar, which is
-today's floor; `recompute` judges it by that and says so.
+An unseen test whose record has no funding clause was written under the bar before 28 Oct 2026,
+which beat holding on return or drawdown; `recompute` judges it by that and says so.

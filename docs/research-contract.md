@@ -103,13 +103,11 @@ names the old one.
 [The registry](registry.md) shows how, and the [reference code](../src/archon_contract/chain.py)
 lets anyone check it.
 
-## 10. Replace, never empty
+## 10. Listed only while it beats holding
 
-A listed strategy that falls short of the bar isn't dropped, which would leave subscribers with
-nothing while research continues. If it still clears a lower floor and hasn't broken its
-drawdown limit, it stays listed and trading, marked as being upgraded, until a stronger
-candidate that passes the full bar takes its place. A strategy under the floor, or past its
-drawdown limit, is withdrawn the same day.
+A listed strategy that falls short of the bar, or breaks its drawdown limit, is withdrawn the same
+day, and the catalogue may be empty while research continues. A subscriber already running it
+keeps it until they switch; nobody new can pick it.
 
 ## 11. Every number is declared
 

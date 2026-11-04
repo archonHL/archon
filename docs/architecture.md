@@ -98,6 +98,5 @@ all it can do.
 
 When the desk lists a strategy, the decision record carries the catalogue entry: name, markets,
 bar width and fee. The catalogue reads the latest decision per strategy, so a listing adds a
-strategy subscribers can choose, an upgrade keeps one listed with its notice, and a withdrawal
-takes one off the list on offer. A decision never changes what an existing account is already
+strategy subscribers can choose, and a withdrawal takes one off the list on offer. A decision never changes what an existing account is already
 trading; subscribers choose what they run. Following signals does not change that choice.

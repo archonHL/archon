@@ -74,43 +74,29 @@ bars, or its bars stop early, the recheck writes nothing and says why.
 | Outcome | When |
 |---|---|
 | keep | The walk-forward passes the bar and the drawdown is inside its limit. |
-| upgrade | It misses the bar but clears the floor, inside its drawdown limit, and no stronger replacement is listed. It stays listed and trading. |
-| replaced | As above, but a listed candidate that passes the bar today takes its place. |
-| withdraw | It broke its drawdown limit, or missed the floor too. |
+| withdraw | It misses the bar, or it broke its drawdown limit. |
 
-## Replace, never empty
+## Listed only while it beats holding
 
-A catalogue that empties itself whenever the market turns leaves subscribers with nothing to
-trade while the desk searches. So a strategy that only misses the bar is marked as being
-upgraded and stays on offer, with one plain sentence saying why, until a stronger candidate
-passes every gate and replaces it. If its walk-forward passes the bar again, it's restored.
+A strategy is listed only while it beats holding the same markets on both return and worst fall.
+One that stops is withdrawn the same day, and a withdrawal is final: a re-test is a new proposal,
+with new trials on the counter. The catalogue may be empty while the desk searches. A subscriber
+already running a withdrawn strategy keeps it until they switch; nobody new can pick it.
 
-The latest decision per strategy is its state. A recheck that leaves the state unchanged writes
-nothing, so the registry holds only changes of state.
+The latest decision per strategy is its state. A recheck that keeps a strategy writes nothing, so
+the registry holds only changes of state.
 
 ```mermaid
 stateDiagram-v2
     direction LR
     [*] --> listed
-    listed --> upgrade: misses the bar, clears the floor
-    listed --> withdrawn: under the floor or past its drawdown limit
-    listed --> replaced: misses the bar while a stronger candidate passes it
-    upgrade --> listed: passes the bar again
-    upgrade --> replaced: a stronger candidate passes the bar
-    upgrade --> withdrawn: under the floor or past its drawdown limit
-    replaced --> upgrade: the replacement is withdrawn
-    replaced --> listed: passes the bar again
-    replaced --> withdrawn: under the floor or past its drawdown limit
+    listed --> withdrawn: misses the bar or past its drawdown limit
 ```
 
-A withdrawal for a breach or a missed floor is final. A strategy withdrawn that way is never
-listed again; a re-test is a new proposal, with new trials on the counter.
-
-The floor came after the desk's first rechecks, which judged the strategies it started with
-against the bar alone and withdrew those that missed it. Those withdrawals were never judged
-against the floor, so they aren't final: the first recheck with the floor put the ones that
-clear it back on offer as being upgraded. The registry keeps both decisions, the later one
-naming the record it supersedes.
+A never-empty policy, withdrawn by the owner in November 2026, kept three strategies on offer that
+missed the bar but cleared a weaker floor (return or drawdown ahead of holding). Its `upgrade`
+records stay in the registry; a strategy whose latest decision is one is rechecked like a listed
+one, on the bar alone.
 
 [`review.py`](../src/archon_contract/review.py) has the state machine, with tests for each
-transition, including a withdrawal written before the floor existed.
+transition, including an `upgrade` record from the withdrawn policy.

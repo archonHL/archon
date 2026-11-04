@@ -17,7 +17,7 @@ Each record is one JSON file, numbered in the order written and never changed af
 | `sequential-plan` | The daily test a trial will be read by, written before the trial's first bar. |
 | `qualify` | The seven qualification tests, written once, pass or fail. |
 | `forward-result`, `family-forward-result` | The trial has closed with every bar and settlement on record. Written once. |
-| `decision` | A listing, withdrawal, upgrade or restore, with every gate's figures and the hashes of the records it rests on. |
+| `decision` | A listing or a withdrawal (and, from a policy withdrawn on 4 Nov 2026, an upgrade), with every gate's figures and the hashes of the records it rests on. |
 
 Research measurements carry the hashes and declarations for the data they read, including
 universe and survivorship, history cap, funding coverage and costs not modelled.

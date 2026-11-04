@@ -53,10 +53,7 @@ frozen before this bar keeps the earlier one: a flat 5 points over holding,
 the median market return and the mean excluding the top two both positive, and no market-hour
 without its funding.
 
-Beside it sits the floor: the same bar with clause 3 met by at least
-5 points of return or by at least 10 points of
-shallower drawdown. The floor lists nothing. It only decides whether a listed strategy that
-slips below the bar is being upgraded or withdrawn ([listing](promotion.md)).
+A listed strategy that slips below the bar is withdrawn ([listing](promotion.md)).
 
 ## Search
 

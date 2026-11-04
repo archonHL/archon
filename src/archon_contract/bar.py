@@ -1,9 +1,8 @@
 """The listing bar: what a strategy must clear, net of fees and funding, to be listed.
 
 One copy judges every measurement: an in-sample search, an out-of-sample read, a forward
-window and the daily recheck of a listed strategy. Beside it is the floor, which lists nothing.
-The floor decides only what happens to a listed strategy that misses the bar: on the floor it
-stays listed while the desk finds its replacement, under it it is withdrawn.
+window and the daily recheck of a listed strategy. A listed strategy that misses it is withdrawn.
+Beside it is the bar in force before 2026-10-28, which judges only records written under it.
 """
 from __future__ import annotations
 
@@ -11,7 +10,7 @@ from dataclasses import dataclass
 
 CASH_YIELD_PCT = 4.0        # idle USDC at a money-market rate
 RETURN_MARGIN_PTS = 5.0     # clearly more than holding, not level with it inside one regime
-DRAWDOWN_MARGIN_PTS = 10.0  # the floor's other way past holding
+EARLIER_DRAWDOWN_MARGIN_PTS = 10.0  # the earlier bar's other way past holding
 YEAR_DAYS = 365.25
 
 
@@ -57,16 +56,13 @@ def clauses(m: Measurement) -> dict[str, bool]:
     }
 
 
-def floor_clauses(m: Measurement) -> dict[str, bool]:
-    """The floor: the bar with holding beaten by the return margin OR the drawdown margin."""
+def earlier_clauses(m: Measurement) -> dict[str, bool]:
+    """The bar before 2026-10-28, for the records written under it: holding beaten by the return margin
+    OR the drawdown margin. It lists nothing and keeps nothing listed now."""
     return {**clauses(m),
             'beats_hold': (m.return_pct >= m.hold_return_pct + RETURN_MARGIN_PTS
-                           or m.drawdown_pct >= m.hold_drawdown_pct + DRAWDOWN_MARGIN_PTS)}
+                           or m.drawdown_pct >= m.hold_drawdown_pct + EARLIER_DRAWDOWN_MARGIN_PTS)}
 
 
 def passes(m: Measurement) -> bool:
     return all(clauses(m).values())
-
-
-def passes_floor(m: Measurement) -> bool:
-    return all(floor_clauses(m).values())
