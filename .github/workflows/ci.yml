@@ -17,6 +17,4 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: pip install -e '.[test]'
       - run: python -m pytest -q
-      - run: python -m archon_contract evidence
-      - run: python -m archon_contract recompute
       - run: python -m archon_contract demo

@@ -1,9 +1,8 @@
-"""Archon's research contract as small, pure, tested functions.
+"""The standard Archon lists a strategy by, and the record that proves it, as small pure functions.
 
-The hash-chained registry and its verifier, the trial counter, the listing bar, the four
-listing gates, the daily recheck that withdraws a strategy once it stops beating holding, the
-trial windows, and the statistics that say how much of a result is luck. No strategy,
-data or execution code: this is the part anyone can check.
+The Sidak cut for the procedures tried on a store, the probabilistic Sharpe test, the comparison
+with holding at both costs, the forward windows, and the verifier of the record's hash chain. No
+strategy, data or trading code: this is the part anyone can check.
 """
 
-__version__ = '1.0.0'
+__version__ = '2.0.0'

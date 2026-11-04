@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "archon-contract"
-version = "1.0.0"
-description = "Archon's research contract: the hash-chained registry, the trial counter, the listing bar, the listing gates and the luck statistics, as pure functions."
+version = "2.0.0"
+description = "The standard Archon lists a strategy by, and the verifier of its hash-chained record, as pure functions."
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.10"

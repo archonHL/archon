@@ -1,44 +1,33 @@
-"""Trials: windows on live prices, frozen before a single bar of them exists.
+"""Forward windows: a strategy traded on live Hyperliquid prices for ``FORWARD_DAYS`` from its next close.
 
-A candidate that passed its unseen read is frozen into a window that starts at the
-next close of its own bar width and runs ``FORWARD_DAYS`` days. The window is never shortened, re-dated
-or read early. Its result is written once, when it has closed and every bar and every
-funding settlement of it is on record; a hole anywhere leaves it incomplete and unscored.
+A window checks execution and can withdraw a strategy; it never lists one, since a window this
+short cannot tell skill from luck. It is written into the record before its first bar exists,
+never shortened, re-dated or read early, and scored once after it ends by replaying the strategy
+on the window's closed prices. The strategy is withdrawn when a hosted run of the same window
+strays from the replay by more than ``PARITY_PTS`` points of return, or when the window falls
+deeper than the strategy's verdict fell over its whole walk-forward at ``STRESS_FEE_BPS``.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from typing import Mapping
 
-FORWARD_DAYS = 60
+from archon_contract.standard import STRESS_FEE_BPS
 
-
-@dataclass(frozen=True)
-class Window:
-    start: datetime
-    end: datetime
-
-    @property
-    def days(self) -> int:
-        return (self.end - self.start).days
+FORWARD_DAYS = 50
+PARITY_PTS = 2.0
+DAY_MS = 86_400_000
 
 
-def next_close(now: datetime, bar: timedelta) -> datetime:
-    """The first bar boundary strictly after ``now``, on a UTC grid."""
-    epoch = datetime(1970, 1, 1, tzinfo=timezone.utc)
-    return epoch + ((now - epoch) // bar + 1) * bar
+def opening(now_ms: int, bar_ms: int) -> tuple[int, int]:
+    """A window opened at ``now_ms``: from the first bar close strictly after it, for ``FORWARD_DAYS``."""
+    start = (now_ms // bar_ms + 1) * bar_ms
+    return start, start + FORWARD_DAYS * DAY_MS
 
 
-def freeze(now: datetime, bar: timedelta) -> Window:
-    start = next_close(now, bar)
-    return Window(start, start + timedelta(days=FORWARD_DAYS))
-
-
-def status(window: Window, now: datetime, *, missing_bars: int, missing_settlements: int) -> str:
-    """'open' until the window closes; then 'complete' only if nothing is missing, else 'incomplete'.
-
-    An open window reports coverage, never a return.
-    """
-    if now < window.end:
-        return 'open'
-    return 'complete' if missing_bars == 0 and missing_settlements == 0 else 'incomplete'
+def withdraws(close: Mapping, verdict: Mapping | None) -> bool:
+    """Whether a closed window withdraws its strategy, from the close and the verdict it names."""
+    replay = close['paper']
+    hosted = close.get('testnet_return_pct')
+    strayed = hosted is not None and abs(hosted - replay['return_pct']) > PARITY_PTS
+    deepest = verdict['levels'][str(STRESS_FEE_BPS)]['drawdown_pct'] if verdict else None
+    return strayed or (deepest is not None and replay['drawdown_pct'] < deepest)

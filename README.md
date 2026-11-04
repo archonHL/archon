@@ -7,44 +7,30 @@
 
 **The first self-improving trading desk on Hyperliquid.**
 
-The desk searches candidate strategies and tests selected finalists on prices outside their
-search. Passing finalists can enter a 60-day trial on live prices. Listing
-requires fixed gates, including a comparison with holding the same markets net of fees and
-funding. Nobody signs off.
+Agents propose strategies around the clock. One evaluator tests each one on prices it was never
+tuned on, and Archon lists a strategy only when it beats simply holding the same markets, on
+return and on its worst fall, by more than luck can explain. Every step is a line in an
+append-only record, each line chained to the one before it by its hash.
 
-Three things make that hard to fake. Every candidate is counted before it's measured, and each
-winner's luck statistics are charged against every candidate ever counted. The gates are code,
-so moving one is a commit, not a setting, and decisions made before the move stay in the record.
-And every proposal, unseen test, trial and decision is a record in a SHA-256 hash chain that the
-desk verifies before every write.
+This repository is that standard and the code that checks it: small, dependency-free, tested
+Python, and the standard in plain words.
 
-This repository is that method and its proof: the research contract as small, dependency-free,
-tested Python, the methodology behind it, and evidence from the desk's record that you can check
-from a fresh clone.
+## How a strategy is listed
 
-## Five stages
+1. **Counted.** A strategy is written down and hashed before anything runs it, then counted on
+   the market data it's tested on. One strategy is one trial, and every count makes the bar for
+   the next one stricter.
+2. **Tested.** It's tested walk-forward: each six months trades the settings that did best on
+   the prices before them, never the prices it's scored on. Every trade is charged
+   5.5 bps a side plus funding, and the whole test runs again at 8.5 bps.
+3. **Judged.** It must make more than holding the same markets and fall less from its best, at
+   both costs. Its daily edge over holding must also pass a luck test that tightens with every
+   strategy ever tried on that data.
+4. **Listed.** Only while both hold. No person approves a listing, nothing keeps the catalogue
+   full, and the catalogue may be empty.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/readme/stages-dark.svg">
-  <img alt="Proposed, Backtested, Unseen-tested, On trial, Listed, and every listed strategy rechecked daily" src="assets/readme/stages-light.svg" width="100%">
-</picture>
-
-1. **Proposed.** A strategy is a short module with a one-sentence economic reason and the
-   candidates it will try. Each candidate joins the global trial counter before it's measured,
-   and the counter only goes up.
-2. **Backtested.** The search reads only prices before 2026-03-01. Candidates rank across folds
-   by their median edge over holding, near-duplicates are dropped, and a group whose PBO is
-   above 0.5 proposes nothing.
-3. **Unseen-tested.** The winner runs once on the prices after 2026-03-01, and the result is
-   written at once, pass or fail. The registry refuses a second read.
-4. **On trial.** A pass is frozen into a trial on live prices that opens at the next close. The
-   window is never shortened or re-dated.
-5. **Listed.** A Proven candidate passes the unseen, luck, trial and engine gates. A
-   Qualified candidate can list before its trial closes if it passes the separate qualification
-   gates and its trial has not failed.
-
-Every listed strategy is rechecked daily. One that no longer beats holding on both return and
-worst fall, or breaks its drawdown limit, is withdrawn that day. The catalogue may be empty.
+A strategy can also run a 50-day forward window on live prices. The window
+checks that real trading matches the test, and it can withdraw a strategy. It never lists one.
 
 ## Verify it yourself
 
@@ -55,50 +41,25 @@ git clone https://github.com/archonHL/archon.git && cd archon
 python3 -m venv .venv && . .venv/bin/activate
 pip install -e '.[test]'
 python -m pytest -q
-python -m archon_contract evidence     # check the shipped manifest's chain and excerpts
-python -m archon_contract recompute    # recompute the listing bar and the luck gate from them
-python -m archon_contract demo         # edit a record and watch verification refuse it
+python -m archon_contract demo                 # write a small record, edit it, watch verify refuse
+python -m archon_contract cut 31               # the luck test's bar after 31 strategies on one store
+python -m archon_contract verify record.jsonl  # check a copy of the record
 ```
 
-`evidence` checks the shipped registry manifest: every line is numbered in order and names the
-hash of the line before it, and each excerpt's identifying fields match its manifest line.
-The command prints the snapshot's record count and head hash, identifying the end of its chain.
-The [verification guide](evidence/) describes each command's scope.
-
-`recompute` takes every proposal and unseen test in those excerpts and rebuilds two gates with
-the code in this repository: the listing bar from the unseen test's returns, drawdowns and
-costs, and the deflated Sharpe from the proposal's Sharpe, skew, kurtosis, length and benchmark. Every
-result must match the record, passes and failures alike.
-
-## The contract
-
-Search enough candidates and some will look brilliant on history by chance. Each line of the
-contract closes one way of fooling yourself, and each is code with a test.
-
-| Line | What it stops |
-|---|---|
-| Trials fixed before they open | Fitting a strategy to its own test. The window, the scoring code's hash and the bar are written before the trial's first bar exists. |
-| Unseen prices read once | Peeking. The registry refuses a second read, and a read that scored days the search saw is labelled as such and can't list anything. |
-| Deflated Sharpe ratio | A lucky winner found by trying thousands of candidates. Every candidate ever counted is charged against it. |
-| White's reality check | A best candidate that only looks good because so many were tried beside it. |
-| Probability of backtest overfitting | A group whose in-sample winners stop winning on the other half of the data. |
-| Hash-chained registry | Changes that break the chain. Verification checks the links, and comparison with an independently retained head detects a rewritten chain. |
-| Gates in code | Judgement calls. No person approves a listing, and no person can force one. |
-| Costs on every replay | Edges that exist only before costs. The realised-funding replay charges fees and settled funding to both strategy and holding; the cost-matched comparison uses that replay. |
-| Listed only while it beats holding | A strategy kept on offer after it stopped beating holding. One that misses the bar is withdrawn, even if nothing replaces it. |
+`verify` checks the chain line by line, then holds every verdict and forward window in it to the
+standard: each verdict's luck bar is the one its store had earned, its pass or fail follows from
+its own figures, and each window opened before its first bar, ran its full length and withdrew
+its strategy exactly when it should. With the whole verdicts beside the record, it recomputes
+each luck test from its daily figures.
 
 ## Layout
 
 | Path | What it is |
 |---|---|
-| [`src/archon_contract/`](src/archon_contract/) | The contract: the chain verifier, the trial counter, the listing bar, the gates, the daily recheck, trial windows, and the reality check, deflated Sharpe and PBO |
-| [`tests/`](tests/) | Its tests, including ones that plant an edge in noise and check each luck figure finds it |
-| [`evidence/`](evidence/) | The registry manifest, and excerpts of every proposal and unseen test the verify commands read |
-| [`docs/research-contract.md`](docs/research-contract.md) | Every line of the contract and the failure it closes |
-| [`docs/methodology.md`](docs/methodology.md) | Data, costs, search, selection, the luck statistics, trials, the sweep budget |
-| [`docs/promotion.md`](docs/promotion.md) | The four gates, qualification, the daily recheck |
-| [`docs/registry.md`](docs/registry.md) | Record kinds, the hash chain, the trial counter, the single writer |
-| [`docs/architecture.md`](docs/architecture.md) | Market data, trading and research, and how a decision reaches the catalogue |
+| [`src/archon_contract/`](src/archon_contract/) | The standard's cut, luck test and comparison with holding, the forward windows, and the record's verifier |
+| [`tests/`](tests/) | Their tests, including planted edges, pure noise and forged records |
+| [`docs/standard.md`](docs/standard.md) | The standard in plain words: one strategy, one trial; the walk-forward; costs; the two tests; listing; forward windows |
+| [`docs/record.md`](docs/record.md) | The record: its lines, its kinds and what a copy proves |
 
 ## License
 
