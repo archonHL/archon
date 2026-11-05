@@ -77,7 +77,7 @@ def beats_hold(level: Mapping) -> bool:
 
 
 def r1(levels: Mapping[str, Mapping]) -> bool:
-    """R1 on a verdict's cost levels, keyed by fee as text: it must beat the hold at both costs."""
+    """R1 on a verdict's cost levels, keyed by fee as text: it must beat holding at both costs."""
     return all(beats_hold(levels[str(fee)]) for fee in (FEE_BPS, STRESS_FEE_BPS))
 
 
