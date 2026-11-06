@@ -27,7 +27,7 @@ from typing import Mapping, Sequence
 
 from archon_contract import standard, windows
 
-KINDS = ('genesis', 'register', 'spend', 'verdict', 'window-open', 'window-close', 'demotion')
+KINDS = ('genesis', 'register', 'spend', 'verdict', 'window-open', 'window-close', 'demotion', 'flagship')
 SERIES = ('daily_excess', 'daily_book')
 
 
