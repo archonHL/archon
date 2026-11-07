@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 import pytest
 
 from archon_contract import record, standard, windows
+from archon_contract.__main__ import main
 
 STORE = 'hyperliquid'
 PROC = record.sha256(b'procedure one')
@@ -191,6 +192,33 @@ def test_a_window_withdraws_its_strategy_exactly_when_it_should(tmp_path, drawdo
     else:
         with pytest.raises(record.RecordError, match='withdrawal does not follow'):
             record.check(found)
+
+
+@pytest.mark.parametrize('kind', ['demotion', 'window-close'])
+def test_a_window_s_closing_rows_must_name_its_procedure(tmp_path, kind):
+    lines = closed(tmp_path, drawdown=-25.0, demoted=True)
+    other = record.sha256(b'procedure two')
+    # A second registered procedure is valid, but cannot replace this window's identity.
+    lines.insert(5, ('register', {'procedure_hash': other}, lines[5][2]))
+    at = next(i for i, (row_kind, _, _) in enumerate(lines) if row_kind == kind)
+    _, body, when = lines[at]
+    lines[at] = (kind, {**body, 'procedure_hash': other}, when)
+    found = record.rows(write(tmp_path, lines).read_bytes())
+    with pytest.raises(record.RecordError, match='different procedure'):
+        record.check(found, tmp_path / 'verdicts')
+
+
+@pytest.mark.parametrize('kind', ['demotion', 'window-close'])
+def test_a_window_s_closing_rows_refuse_a_missing_procedure(tmp_path, capsys, kind):
+    lines = closed(tmp_path, drawdown=-25.0, demoted=True)
+    at = next(i for i, (row_kind, _, _) in enumerate(lines) if row_kind == kind)
+    _, body, when = lines[at]
+    lines[at] = (kind, {k: v for k, v in body.items() if k != 'procedure_hash'}, when)
+    path = write(tmp_path, lines)
+    with pytest.raises(record.RecordError, match='missing procedure_hash'):
+        record.check(record.rows(path.read_bytes()), tmp_path / 'verdicts')
+    assert main(['verify', str(path)]) == 1
+    assert 'missing procedure_hash' in capsys.readouterr().err
 
 
 def test_a_window_is_scored_against_its_procedure_s_latest_verdict(tmp_path):

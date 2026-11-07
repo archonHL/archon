@@ -43,9 +43,12 @@ A count looks like this:
 - Every line follows the one before it, numbered in order, and the genesis is line 1.
 - A strategy is counted only once registered, and judged only once counted on that store.
 - Each verdict's Neff is every strategy tried on its store before it, its cut is the Sidak cut
-  for that Neff, and its R1 and S2 follow from its own figures.
+  for that Neff, and its R1 and S2 follow from its own figures. The overlapping `hyperliquid`
+  and `hyperliquid-all` stores share the sum of their genesis counts and every evaluation on
+  either store. Other stores keep separate counts; counting the same strategy on both
+  Hyperliquid stores adds two evaluations, even if only one reaches a verdict.
 - With the whole verdicts in a `verdicts` folder beside the record, each matches its sha256 and
   its line, and its S2 p-value is recomputed from its daily figures.
 - Each window opened before its first bar, runs 50 days, closed only after it
   ended, was compared with its strategy's latest verdict, and withdrew its strategy exactly when
-  the standard says it must.
+  the standard says it must. Its withdrawal and close rows must name the procedure in its opening.

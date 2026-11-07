@@ -55,6 +55,9 @@ share in cash.
   and every one counted since, whether or not it reached a verdict. The cut holds the chance that
   luck alone passes S2 for any strategy on that store to 5%, and it tightens with every
   count.
+  Hyperliquid's crypto store and its store including builder-deployed markets overlap, so their
+  prior counts and every evaluation on either store share one Neff. Moving a strategy from one
+  to the other cannot give it a looser luck-test bar. Other stores retain separate counts.
 - **Verdict pass** exactly when R1 and S2 both pass. The listing tiers below distinguish this
   result from an Early listing.
 

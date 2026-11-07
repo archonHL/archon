@@ -28,6 +28,9 @@ from typing import Mapping, Sequence
 from archon_contract import standard, windows
 
 KINDS = ('genesis', 'register', 'spend', 'verdict', 'window-open', 'window-close', 'demotion', 'flagship')
+HYPERLIQUID = 'hyperliquid'
+HYPERLIQUID_ALL = 'hyperliquid-all'
+SHARED_STORES = (HYPERLIQUID, HYPERLIQUID_ALL)
 SERIES = ('daily_excess', 'daily_book')
 
 
@@ -99,11 +102,17 @@ def _verdict(r: Mapping, n: int, bodies: Path | None) -> None:
         raise RecordError(f'{at}: its daily excess does not give the S2 p-value it recorded')
 
 
+def _neff(store: str, prior: Mapping, tried: Mapping) -> int:
+    group = SHARED_STORES if store in SHARED_STORES else (store,)
+    return sum(prior.get(s, 0) + tried.get(s, 0) for s in group)
+
+
 def check(found: Sequence[Mapping], bodies: Path | None = None) -> dict:
     """Hold every verdict and forward window in ``found`` to the standard, or RecordError naming the first that breaks it.
 
     A procedure is counted only once registered, and judged only once counted. A verdict's Neff is
     every procedure tried on its store before it (the genesis' ``prior_groups`` plus every count),
+    shared across the two overlapping Hyperliquid stores,
     its cut is the Sidak cut there, and its R1 and S2 follow from its own figures. With ``bodies``,
     the directory of whole verdicts, each verdict's daily excess is read again and its S2 p-value
     recomputed. A window opens before its first bar, runs ``windows.FORWARD_DAYS``, closes only
@@ -111,6 +120,7 @@ def check(found: Sequence[Mapping], bodies: Path | None = None) -> dict:
     the counts it checked and each store's Neff now.
     """
     registered, counted, tried, latest, opened, withdrawn = set(), set(), {}, {}, {}, set()
+    prior = found[0]['prior_groups'] if found else {}
     closed = verdicts = 0
     for r in found[1:]:
         kind, at = r['kind'], f'record {r["seq"]}'
@@ -128,7 +138,7 @@ def check(found: Sequence[Mapping], bodies: Path | None = None) -> dict:
             key = (r['store'], r['procedure_hash'])
             if key not in counted:
                 raise RecordError(f'{at}: a verdict on a procedure not counted on its store before it ran')
-            _verdict(r, found[0]['prior_groups'].get(r['store'], 0) + tried.get(r['store'], 0), bodies)
+            _verdict(r, _neff(r['store'], prior, tried), bodies)
             latest[key] = r['seq']
             verdicts += 1
         elif kind == 'window-open':
@@ -142,17 +152,24 @@ def check(found: Sequence[Mapping], bodies: Path | None = None) -> dict:
         elif kind == 'demotion':
             if r['window'] not in opened:
                 raise RecordError(f'{at}: a withdrawal by no open window')
+            if 'procedure_hash' not in r:
+                raise RecordError(f'{at}: missing procedure_hash')
+            if r['procedure_hash'] != opened[r['window']]['procedure_hash']:
+                raise RecordError(f'{at}: withdraws a different procedure from its window')
             withdrawn.add(r['window'])
         elif kind == 'window-close':
             w = opened.pop(r['window'], None)
             if w is None or _ms(r['written_utc']) < w['end_ms']:
                 raise RecordError(f'{at}: closes no open window, or closes one before it ended')
+            if 'procedure_hash' not in r:
+                raise RecordError(f'{at}: missing procedure_hash')
+            if r['procedure_hash'] != w['procedure_hash']:
+                raise RecordError(f'{at}: closes a different procedure from its window')
             if r['verdict_seq'] != latest.get((w['venue'], w['procedure_hash'])):
                 raise RecordError(f'{at}: scored against a verdict other than its procedure\'s latest')
             verdict = found[r['verdict_seq'] - 1]['verdict'] if r['verdict_seq'] else None
             if windows.withdraws(r, verdict) != (r['window'] in withdrawn):
                 raise RecordError(f'{at}: its strategy\'s withdrawal does not follow from the window')
             closed += 1
-    prior = found[0]['prior_groups'] if found else {}
     return {'verdicts': verdicts, 'windows_open': len(opened), 'windows_closed': closed,
-            'neff': {s: prior.get(s, 0) + tried.get(s, 0) for s in sorted({*prior, *tried})}}
+            'neff': {s: _neff(s, prior, tried) for s in sorted({*prior, *tried})}}
