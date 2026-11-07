@@ -53,20 +53,38 @@ share in cash.
   at the base cost) gives a p-value. It must fall below the Sidak cut `1 - (1 - 0.05)^(1/Neff)`,
   where Neff counts every strategy tried on that store: the ones tried before the record opened,
   and every one counted since, whether or not it reached a verdict. The cut holds the chance that
-  luck alone lists any strategy on that store to 5%, and it tightens with every
+  luck alone passes S2 for any strategy on that store to 5%, and it tightens with every
   count.
-- **Listable** exactly when both pass. There is no floor and no exception.
+- **Verdict pass** exactly when R1 and S2 both pass. The listing tiers below distinguish this
+  result from an Early listing.
 
 Every verdict also reports, without judging on them, the share of test windows that beat their
 hold on both counts, the median window's edge, and the mean edge without the two best windows.
 
 ## Listing
 
-A strategy is listed from its Hyperliquid verdict, the venue it trades on. That verdict, and its
-latest verdict on every other store it was tested on, must pass R1 and S2, each at that
-store's Neff today. A failure anywhere withholds it, so testing a strategy elsewhere can't buy a
-listing. As later strategies raise Neff, a listing can lapse. Listed strategies rank by their
-median window edge, then by the mean without the two best windows.
+A strategy is listed from its verdict on the markets Hyperliquid trades. That verdict and its
+latest verdict on every other store it was tested on must meet the applicable tier's requirements
+under the current standard:
+
+- **Proven.** Every verdict passes R1 and S2, each at its store's Neff today.
+- **Early.** Every verdict passes R1 and made money at both costs, but S2 is not met on at least
+  one store. Each also
+  needs at least 548 tested days, at least 8 independent bets, an
+  annual return of at least 10% at the higher cost, and a luck-test p-value
+  below 0.05. No closed forward window may have failed to beat holding on both return
+  and worst fall.
+
+Independent bets measure how broadly returns are spread across consecutive 30-day blocks,
+rather than being carried by a few blocks. The Early floor does not replace S2's across-trial
+luck control: an Early strategy has not earned Proven status.
+
+A failure of R1 on any store withholds the strategy. A forward-window demotion withdraws it
+from both tiers. As later counts tighten S2, a Proven strategy can fall to Early if it still
+qualifies. Entries rank Proven first, then by annual excess Sharpe, then by drawdown advantage
+at the higher cost; near-duplicates list once. A strategy is offered for Hosted only while its
+tested span, replayed on the market data it trades on, still makes money and beats holding on
+return and worst fall.
 
 Nothing keeps the catalogue full. When no strategy passes, nothing is listed.
 

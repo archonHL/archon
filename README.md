@@ -8,8 +8,9 @@
 **The first self-improving trading desk on Hyperliquid.**
 
 Agents propose strategies around the clock. One evaluator tests each one on prices it was never
-tuned on, and Archon lists a strategy only when it beats simply holding the same markets, on
-return and on its worst fall, by more than luck can explain. Every step is a line in an
+tuned on. Both listing tiers beat simply holding the same markets on return and worst fall:
+Early also clears an evidence floor, while Proven passes the luck test adjusted for every trial.
+Every step is a line in an
 append-only record, each line chained to the one before it by its hash.
 
 This repository is that standard and the code that checks it: small, dependency-free, tested
@@ -24,10 +25,12 @@ Python, and the standard in plain words.
    the prices before them, never the prices it's scored on. Every trade is charged
    5.5 bps a side plus funding, and the whole test runs again at 8.5 bps.
 3. **Judged.** It must make more than holding the same markets and fall less from its best, at
-   both costs. Its daily edge over holding must also pass a luck test that tightens with every
-   strategy ever tried on that data.
-4. **Listed.** Only while both hold. No person approves a listing, nothing keeps the catalogue
-   full, and the catalogue may be empty.
+   both costs. The verdict also measures its daily edge over holding with a luck test that
+   tightens with every strategy ever tried on that data.
+4. **Listed.** Proven passes both tests; Early beats holding, made money at both costs and clears
+   the [evidence floor](docs/standard.md#listing), without a closed forward window failing the
+   holding comparison. No person approves a listing, nothing keeps the catalogue full, and the
+   catalogue may be empty.
 
 A strategy can also run a 50-day forward window on live prices. The window
 checks that real trading matches the test, and it can withdraw a strategy. It never lists one.
