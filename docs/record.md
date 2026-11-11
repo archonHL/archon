@@ -37,6 +37,7 @@ A count looks like this:
 | `window-open` | Before the window's first bar | The strategy, the setting it trades, and the window's first and last bar |
 | `demotion` | When a window withdraws a strategy | The window and why |
 | `window-close` | Once the window has ended | The replay, the hosted run's return, and the verdict it was compared with |
+| `flagship` | When a strategy becomes the one every hosted account trades | Its hash, the day it took over, why, and the strategy it replaced. The latest is current. It never changes a verdict, a listing or a window |
 
 ## What `verify` checks
 
