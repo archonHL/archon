@@ -74,6 +74,21 @@ def test_a_whole_record_checks(path, tmp_path):
     assert seen == {'verdicts': 1, 'windows_open': 0, 'windows_closed': 1, 'neff': {STORE: 3}}
 
 
+def test_a_flagship_row_is_chained_and_changes_no_count(tmp_path):
+    """A flagship row names the strategy every hosted account trades. It is chained like any line and never changes
+    a verdict, a count or a window (docs/record.md)."""
+    lines = closed(tmp_path)
+    lines.insert(5, ('flagship', {'procedure_hash': PROC, 'since_utc': utc(OPENED), 'reason': 'owner decision',
+                                  'replaces': None}, OPENED))
+    path = write(tmp_path, lines)
+    found = record.rows(path.read_bytes())
+    assert [r['kind'] for r in found][5] == 'flagship'  # after the window opens, before it closes
+    assert record.check(found, tmp_path / 'verdicts') == {'verdicts': 1, 'windows_open': 0, 'windows_closed': 1,
+                                                          'neff': {STORE: 3}}
+    with pytest.raises(record.RecordError, match='out of sequence or its chain is broken'):
+        record.rows(path.read_bytes().replace(b'owner decision', b'owner decided'))
+
+
 def test_lines_are_canonical_json(path):
     for line in path.read_bytes().splitlines():
         assert line == json.dumps(json.loads(line), sort_keys=True, separators=(',', ':')).encode()
