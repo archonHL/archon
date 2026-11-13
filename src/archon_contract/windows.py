@@ -2,7 +2,7 @@
 
 A window checks execution and can withdraw a strategy; it never lists one, since a window this
 short cannot tell skill from luck. It is written into the record before its first bar exists,
-never shortened, re-dated or read early, and scored once after it ends by replaying the strategy
+never shortened, re-dated or scored early, and scored once after it ends by replaying the strategy
 on the window's closed prices. The strategy is withdrawn when a hosted run of the same window
 strays from the replay by more than ``PARITY_PTS`` points of return, or when the window falls
 deeper than the strategy's verdict fell over its whole walk-forward at ``STRESS_FEE_BPS``.

@@ -94,7 +94,7 @@ Nothing keeps the catalogue full. When no strategy passes, nothing is listed.
 ## Forward windows
 
 A 50-day forward window trades one setting of a strategy on live Hyperliquid
-prices from the next close after it's written. It's never shortened, re-dated or read early. Once
+prices from the next close after it's written. It's never shortened, re-dated or scored early. Once
 it ends, it's scored once, by replaying the strategy on the window's closed prices with the same
 book and costs as the test.
 
