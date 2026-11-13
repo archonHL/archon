@@ -13,7 +13,8 @@ that scored best on every window before it. The test windows chain into one curv
 R1 asks that curve to make more than holding the same markets, bought at its first test bar, and
 to fall less from its best, at both costs. S2 asks the probabilistic Sharpe of its daily log
 excess over holding to clear the Sidak cut for the procedures tried on the store, ``neff``. A
-verdict is listable exactly when both pass.
+verdict is Proven exactly when both pass. The Early tier and its evidence floor are in
+docs/standard.md, "Listing".
 """
 from __future__ import annotations
 
@@ -81,5 +82,6 @@ def r1(levels: Mapping[str, Mapping]) -> bool:
     return all(beats_hold(levels[str(fee)]) for fee in (FEE_BPS, STRESS_FEE_BPS))
 
 
-def listable(levels: Mapping[str, Mapping], excess: Sequence[float], neff: int) -> bool:
+def proven(levels: Mapping[str, Mapping], excess: Sequence[float], neff: int) -> bool:
+    """Whether a verdict is Proven: R1 at both costs and S2 below the Sidak cut for ``neff``."""
     return r1(levels) and psr_p(excess) < sidak(neff)

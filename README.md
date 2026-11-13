@@ -27,9 +27,9 @@ Python, and the standard in plain words.
 3. **Judged.** It must make more than holding the same markets and fall less from its best, at
    both costs. The verdict also measures its daily edge over holding with a luck test that
    tightens with every strategy ever tried on that data.
-4. **Listed.** Proven passes both tests; Early beats holding, made money at both costs and clears
-   the [evidence floor](docs/standard.md#listing), without a closed forward window failing the
-   holding comparison. No person approves a listing, nothing keeps the catalogue full, and the
+4. **Listed.** Proven passes both tests. Early beats holding, made money at both costs and clears
+   the [evidence floor](docs/standard.md#listing), and none of its closed forward windows fell as far
+   as holding did. No person approves a listing, nothing keeps the catalogue full, and the
    catalogue may be empty.
 
 A strategy can also run a 50-day forward window on live prices. The window

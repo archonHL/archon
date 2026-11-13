@@ -75,8 +75,8 @@ under the current standard:
   one store. Each also
   needs at least 548 tested days, at least 8 independent bets, an
   annual return of at least 10% at the higher cost, and a luck-test p-value
-  below 0.05. No closed forward window may have failed to beat holding on both return
-  and worst fall.
+  below 0.05. No closed forward window may have fallen as far as holding did over the
+  same days.
 
 Independent bets measure how broadly returns are spread across consecutive 30-day blocks,
 rather than being carried by a few blocks. The Early floor does not replace S2's across-trial

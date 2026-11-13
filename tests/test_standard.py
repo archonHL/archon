@@ -75,10 +75,10 @@ def test_r1_needs_more_return_and_a_shallower_fall_at_both_costs():
         standard.r1({str(standard.FEE_BPS): win})                          # one cost is not both
 
 
-def test_listable_needs_r1_and_s2():
+def test_proven_needs_r1_and_s2():
     rng = random.Random(3)
     edge = [rng.gauss(0.003, 0.01) for _ in range(730)]
     win, lose = level(30.0, -20.0, 25.0, -40.0), level(20.0, -20.0, 25.0, -40.0)
-    assert standard.listable(levels(win, win), edge, 31)
-    assert not standard.listable(levels(win, lose), edge, 31)
-    assert not standard.listable(levels(win, win), [rng.gauss(0, 0.01) for _ in range(730)], 31)
+    assert standard.proven(levels(win, win), edge, 31)
+    assert not standard.proven(levels(win, lose), edge, 31)
+    assert not standard.proven(levels(win, win), [rng.gauss(0, 0.01) for _ in range(730)], 31)
