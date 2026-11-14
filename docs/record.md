@@ -3,6 +3,16 @@
 Everything the desk registers, counts, judges and forward-tests is a line in one append-only
 record. [`record.py`](../src/archon_contract/record.py) reads it and checks it.
 
+## Inputs for verification
+
+The verifier needs a complete `record.jsonl` file. The website’s timeline shows selected fields;
+its rows do not contain all the bytes needed to recompute each hash. Production record and verdict
+files are not included in this repository. The demo creates its own small sample.
+
+A complete record lets `verify` check the chain and the decisions recorded in it. To recompute S2
+from daily figures, also supply the full verdict files, named by their hashes, in a `verdicts`
+folder beside the record. The command accepts `--bodies` for a different folder.
+
 ## Lines and the chain
 
 The record is one file with one JSON object per line, written with sorted keys and no spaces.

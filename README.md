@@ -35,9 +35,11 @@ Python, and the standard in plain words.
 A strategy can also run a 50-day forward window on live prices. The window
 checks that real trading matches the test, and it can withdraw a strategy. It never lists one.
 
-## Verify it yourself
+## Use the verifier
 
-Python 3.10 or later; the package has no dependencies.
+Python 3.10 or later; the package has no dependencies. The demo runs on its own sample.
+Checking a production record requires the [complete input files](docs/record.md#inputs-for-verification),
+which are not included here.
 
 ```sh
 git clone https://github.com/archonHL/archon.git && cd archon
